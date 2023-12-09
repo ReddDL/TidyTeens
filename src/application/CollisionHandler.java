@@ -8,9 +8,6 @@ import javafx.scene.shape.Rectangle;
 
 public class CollisionHandler {
 	
-	
-	
-	
 	/*
 	 * checkCollision
 	 * returns true if the player collides with an unbreakable

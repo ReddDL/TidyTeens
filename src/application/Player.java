@@ -14,7 +14,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 
-public class Player{
+public class Player extends Sprite{
 	@FXML private ImageView player;
 	@FXML AnchorPane scene;
 	private double x;
@@ -28,16 +28,14 @@ public class Player{
 	
 	private BooleanBinding keyPressed = upPressed.or(leftPressed).or(rightPressed).or(downPressed);
 		
-	private double movementVariable = 1;
+	private double movementVariable = 2;
 	
 	CollisionHandler collisionHandler = new CollisionHandler();
 	PlayerController playerController;
 
     public Player(ImageView player, double x, double y, int lives, int scoreCounter, PlayerController playerController) {
-        this.player = player;
-        this.x = x;
-        this.y = y;
-        this.lives = lives;
+        super(x,y,player);
+        this.lives = 1;
         this.scoreCounter = scoreCounter;
         this.playerController = playerController;
     }
@@ -125,29 +123,9 @@ public class Player{
     		this.scoreCounter++;
     }
     
-    public double returnX() {
-    		return player.getX();
-    }
-    
-    public double returnY() {
-    		return player.getY();
-    }
-    
-    public void newX(double x) {
-    		player.setX(x);
-    }
-    
-    public void newY(double y) {
-    		player.setY(y);
-    }
-    
     public Bounds getPlayerBounds() {
         return player.getBoundsInParent();
     }
 
-  
-    public ImageView getPlayerImageView() {
-        return player;
-    }
 
 }

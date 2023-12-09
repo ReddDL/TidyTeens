@@ -17,10 +17,10 @@
       <Rectangle fx:id="Bed" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="249.0" layoutX="256.0" layoutY="81.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="222.0" />
       <Rectangle fx:id="Cabinet1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="42.0" layoutX="78.0" layoutY="80.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="124.0" />
       <Rectangle fx:id="Box1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="57.0" layoutX="81.0" layoutY="182.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="51.0" />
-      <Rectangle fx:id="Box2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="44.0" layoutX="187.0" layoutY="190.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="44.0" />
-      <Rectangle fx:id="Cabinet2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="49.0" layoutX="515.0" layoutY="79.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="130.0" />
+      <Rectangle fx:id="Box2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="44.0" layoutX="191.0" layoutY="190.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+      <Rectangle fx:id="Cabinet2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="44.0" layoutX="524.0" layoutY="84.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="115.0" />
       <Rectangle fx:id="Shelf2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="152.0" layoutX="88.0" layoutY="393.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
-      <Rectangle fx:id="Shelf1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="42.0" layoutX="116.0" layoutY="393.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="115.0" />
+      <Rectangle fx:id="Shelf1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="116.0" layoutY="393.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="109.0" />
       <Rectangle fx:id="Box5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="51.0" layoutX="539.0" layoutY="288.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
       <Rectangle fx:id="Box6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="42.0" layoutX="589.0" layoutY="191.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
       <Rectangle fx:id="Box4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="42.0" layoutX="191.0" layoutY="547.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
@@ -30,11 +30,11 @@
       <Rectangle fx:id="Desk1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="133.0" layoutX="557.0" layoutY="402.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
       <Rectangle fx:id="Box3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="96.0" layoutY="650.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
       <Rectangle fx:id="Plant" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="31.0" layoutX="195.0" layoutY="656.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
-      <Rectangle fx:id="TVset" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="282.0" layoutY="660.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="155.0" />
-      <Rectangle fx:id="Table1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="42.0" layoutX="491.0" layoutY="651.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="138.0" />
+      <Rectangle fx:id="TVset" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="282.0" layoutY="660.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="148.0" />
+      <Rectangle fx:id="Table1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="42.0" layoutX="495.0" layoutY="651.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="134.0" />
       <Rectangle fx:id="RightWall" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="815.0" layoutX="695.0" layoutY="-4.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="51.0" />
-      <Rectangle fx:id="TopWall" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="-9.0" layoutY="-15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="763.0" />
-      <Rectangle fx:id="LeftWall" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="825.0" layoutX="-11.0" layoutY="-14.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle fx:id="TopWall" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="-9.0" layoutY="-15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="763.0" />
+      <Rectangle fx:id="LeftWall" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="825.0" layoutX="-11.0" layoutY="-14.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="33.0" />
       <Rectangle fx:id="BottomWall" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="57.0" layoutX="-14.0" layoutY="758.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="759.0" />
       <ImageView fx:id="player" fitHeight="52.0" fitWidth="57.0" layoutX="333.0" layoutY="388.0" pickOnBounds="true" preserveRatio="true">
          <image>

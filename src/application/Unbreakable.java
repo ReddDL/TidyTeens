@@ -9,29 +9,29 @@ import javafx.scene.shape.Rectangle;
 
 public class Unbreakable extends Rectangle{
 	
-	private Rectangle unbreakable;
-	private Rectangle Bed;
-	private Rectangle Plant;
-	private Rectangle Shelf1;
-	private Rectangle Shelf2;
-	private Rectangle Box1;
-	private Rectangle Box2;
-	private Rectangle Box3;
-	private Rectangle Box4;
-	private Rectangle Cabinet1;
-	private Rectangle TVset;
-	private Rectangle chair1;
-	private Rectangle chair2;
-	private Rectangle Table1;
-	private Rectangle Desk1;
-	private Rectangle Desk2;
-	private Rectangle Box5;
-	private Rectangle Box6;
-	private Rectangle Cabinet2;
-	private Rectangle RightWall;
-	private Rectangle TopWall;
-	private Rectangle LeftWall;
-	private Rectangle BottomWall;
+	@FXML private Rectangle Bed;
+	@FXML private Rectangle Plant;
+	@FXML private Rectangle Shelf1;
+	@FXML private Rectangle Shelf2;
+	@FXML private Rectangle Box1;
+	@FXML private Rectangle Box2;
+	@FXML private Rectangle Box3;
+	@FXML private Rectangle Box4;
+	@FXML private Rectangle Cabinet1;
+	@FXML private Rectangle TVset;
+	@FXML private Rectangle chair1;
+	@FXML private Rectangle chair2;
+	@FXML private Rectangle Table1;
+	@FXML private Rectangle Desk1;
+	@FXML private Rectangle Desk2;
+	@FXML private Rectangle Box5;
+	@FXML private Rectangle Box6;
+	@FXML private Rectangle Cabinet2;
+	@FXML private Rectangle RightWall;
+	@FXML private Rectangle TopWall;
+	@FXML private Rectangle LeftWall;
+	@FXML private Rectangle BottomWall;
+	
 	private ArrayList<Rectangle> unbreakableObjects;
 
 	
@@ -62,7 +62,8 @@ public class Unbreakable extends Rectangle{
 		unbreakableObjects.add(BottomWall);
 		return unbreakableObjects;
 	}
-	public Bounds getUnbreakableBounds() {
-		return unbreakable.getBoundsInParent();
-	}
+	
+    public Bounds getUnbreakableBounds(Rectangle rectangle) {
+        return rectangle.getBoundsInParent();
+    }
 }

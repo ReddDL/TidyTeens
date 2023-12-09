@@ -43,12 +43,8 @@ public class PlayGame{
 			Parent root = loader.load();
 			PlayerController = loader.getController();
 			
-			
 			Scene scene = new Scene(root);
-			scene.getRoot().requestFocus();
-
-			scene.addEventFilter(KeyEvent.KEY_PRESSED, new AL());
-			
+			scene.getRoot().requestFocus();			
 			
 			this.stage = stage;
 			this.stage.setTitle("Tidy Teens - Play Game");
@@ -61,13 +57,5 @@ public class PlayGame{
 		
 	}
 	
-	
-	public class AL implements EventHandler<KeyEvent>{
-		@Override
-		public void handle(KeyEvent e) {
-//			PlayerController.move(e);
-//			PlayerController.checkCollision();
-		}
-	}
 	
 }

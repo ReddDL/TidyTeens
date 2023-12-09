@@ -2,17 +2,12 @@ package application;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Bounds;
-import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -25,7 +20,6 @@ public class PlayerController implements Initializable{
 	private Player playerComponent;
 	
 	@FXML private AnchorPane scene;
-	
 	
 	private double x = 0;
 	private double y = 0;
@@ -82,11 +76,11 @@ public class PlayerController implements Initializable{
 	@FXML private ImageView breakable23;
 	@FXML private ImageView breakable24;
 
-	private ArrayList<Rectangle> unbreakableObjects = new ArrayList();
+//	Unbreakable unbreakable = new Unbreakable();
+	private ArrayList<Rectangle> unbreakableObjects = new ArrayList<>();
 	
-	private ArrayList<ImageView> breakableObjects = new ArrayList();
+	private ArrayList<ImageView> breakableObjects = new ArrayList<>();
 	
-	Unbreakable unbreakable = new Unbreakable();
 	
 	CollisionHandler collisionHandler = new CollisionHandler();
 	
@@ -101,8 +95,6 @@ public class PlayerController implements Initializable{
 
 			@Override
 			public void handle(long arg0) {
-				double currentX = player.getX();
-				double currentY = player.getY();
 				
 				playerComponent.makeMovable(player, scene, unbreakableObjects);
 			}	
@@ -110,6 +102,7 @@ public class PlayerController implements Initializable{
 		
 		gameLoop.start();
 		
+		// add the unbreakable objects
 		unbreakableObjects.add(Bed);
 		unbreakableObjects.add(Cabinet1);
 		unbreakableObjects.add(Shelf1);
@@ -133,8 +126,7 @@ public class PlayerController implements Initializable{
 		unbreakableObjects.add(LeftWall);
 		unbreakableObjects.add(BottomWall);
 		
-//		breakableObjects = new ArrayList<>();
-
+		// add the breakable objects
 		breakableObjects.add(breakable1);
 		breakableObjects.add(breakable2);
 		breakableObjects.add(breakable3);
