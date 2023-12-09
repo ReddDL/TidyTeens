@@ -16,8 +16,8 @@ public class CollisionHandler {
 	 * returns true if the player collides with an unbreakable
 	 * returns false if the player does not collide with unbreakable
 	 */
-	public boolean checkCollisionUnbreakables(Player player, ArrayList<Rectangle> unbreakableObjects) {
-        Bounds playerBounds = player.getPlayerBounds();
+	public boolean checkCollisionUnbreakables(ImageView player, ArrayList<Rectangle> unbreakableObjects) {
+        Bounds playerBounds = player.getBoundsInParent();
         
         for (Rectangle rectangle : unbreakableObjects) {
         		
@@ -25,6 +25,8 @@ public class CollisionHandler {
 
             if (playerBounds.intersects(rectangleBounds)) {
 //            		System.out.println("There is a collision with " + rectangle.getId());		
+//            	System.out.println("PLAYER BOUNDS: " + playerBounds);
+//            	System.out.println("PLAYER BOUNDS + 1: " + playerBounds + 1);
             	System.out.println("You can't go there!");
             	return true;
             } 

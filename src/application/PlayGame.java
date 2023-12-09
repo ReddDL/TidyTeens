@@ -66,7 +66,7 @@ public class PlayGame{
 	public class AL implements EventHandler<KeyEvent>{
 		@Override
 		public void handle(KeyEvent e) {
-			PlayerController.move(e);
+//			PlayerController.move(e);
 //			PlayerController.checkCollision();
 		}
 	}

@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
@@ -88,13 +89,37 @@ public class PlayerController implements Initializable{
 	Unbreakable unbreakable = new Unbreakable();
 	
 	CollisionHandler collisionHandler = new CollisionHandler();
+	
+	AnimationTimer gameLoop;
+	
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		this.scene = scene;
-		playerComponent = new Player(player, x, y, lives, scoreCounter);
+		playerComponent = new Player(player, x, y, lives, scoreCounter, unbreakableObjects);
 //		playerComponent.makeMovable(player, scene);
 		
+		gameLoop = new AnimationTimer() {
+
+			@Override
+			public void handle(long arg0) {
+				double currentX = player.getX();
+				double currentY = player.getY();
+				
+				playerComponent.makeMovable(player, scene, unbreakableObjects);
+				if(collisionHandler.checkCollisionUnbreakables(player, unbreakableObjects)) {
+					player.setX(currentX);
+					player.setY(currentY);
+				}
+				
+				
+//				update();				
+			}	
+		};
 		
+//		load();
+		
+		gameLoop.start();
 		
 		unbreakableObjects.add(Bed);
 		unbreakableObjects.add(Cabinet1);
@@ -147,31 +172,31 @@ public class PlayerController implements Initializable{
 		breakableObjects.add(breakable24);
 	}
 	
+	// called every frame update
+	private void update() {
+//		double currentX = playerComponent.returnX();
+//		double currrentY = playerComponent.returnY();
+		playerComponent.makeMovable(player, scene, unbreakableObjects);
+		
+//		if (playerComponent.playerCollidesWithUnbreakable(unbreakableObjects)) {
+////			playerComponent.newX(currentX);
+////			playerComponent.newY(currrentY);
+//			playerComponent.timer.stop();
+//			
+//		} else {
+////			playerComponent.makeMovable(player, scene, unbreakableObjects);
+//			playerComponent.timer.start();
+//			
+//		}
+
+	}
+	
 	/*
 	 * move 
 	 * checks for keypresses in the scene
 	 * stores the current x and y and if there is a collision, returns the player 
 	 * to their previous position
 	 */
-	public void move(KeyEvent e) {
-		double currentX = playerComponent.returnX();
-		double currrentY = playerComponent.returnY();
-//		playerComponent.move(e);
-		playerComponent.makeMovable(player, scene);
-
-		
-//		if (collisionHandler.checkCollision(playerComponent, unbreakableObjects)) {
-//			playerComponent.newX(currentX);
-//			playerComponent.newY(currrentY);
-//		}
-//		
-//		if (collisionHandler.checkCollisionBreakables(playerComponent, breakableObjects)) 		{
-//			playerComponent.newX(currentX);
-//			playerComponent.newY(currrentY);
-//			pointChecker();
-//		}
-	}
-	
 	
 	private void pointChecker() {
 		playerComponent.incrementScore();		score.setText(String.valueOf(playerComponent.getScore()));
