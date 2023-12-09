@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.scene.Group;
@@ -17,6 +18,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
@@ -29,7 +31,7 @@ public class PlayGame{
 	
 	private Stage stage;
 	private Group root;
-	private Scene scene;
+	@FXML private AnchorPane scene;
 	private GraphicsContext gc;
 	
 	private PlayerController PlayerController;
@@ -43,7 +45,9 @@ public class PlayGame{
 			
 			
 			Scene scene = new Scene(root);
-			PlayerController.initialize();
+//			PlayerController.initialize();
+			scene.getRoot().requestFocus();
+
 			scene.addEventFilter(KeyEvent.KEY_PRESSED, new AL());
 			
 			

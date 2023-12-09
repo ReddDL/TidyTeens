@@ -1,22 +1,29 @@
 package application;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
+import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 
-public class PlayerController {
+public class PlayerController implements Initializable{
 	
 	@FXML
 	private ImageView player;
 	private Player playerComponent;
+	
+	@FXML private AnchorPane scene;
 	
 	
 	private double x = 0;
@@ -81,11 +88,14 @@ public class PlayerController {
 	Unbreakable unbreakable = new Unbreakable();
 	
 	CollisionHandler collisionHandler = new CollisionHandler();
-
-	public void initialize() {
-		
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		this.scene = scene;
 		playerComponent = new Player(player, x, y, lives, scoreCounter);
-
+//		playerComponent.makeMovable(player, scene);
+		
+		
+		
 		unbreakableObjects.add(Bed);
 		unbreakableObjects.add(Cabinet1);
 		unbreakableObjects.add(Shelf1);
@@ -146,18 +156,20 @@ public class PlayerController {
 	public void move(KeyEvent e) {
 		double currentX = playerComponent.returnX();
 		double currrentY = playerComponent.returnY();
-		playerComponent.move(e);
+//		playerComponent.move(e);
+		playerComponent.makeMovable(player, scene);
+
 		
-		if (collisionHandler.checkCollision(playerComponent, unbreakableObjects)) {
-			playerComponent.newX(currentX);
-			playerComponent.newY(currrentY);
-		}
-		
-		if (collisionHandler.checkCollisionBreakables(playerComponent, breakableObjects)) {
-			playerComponent.newX(currentX);
-			playerComponent.newY(currrentY);
-			pointChecker();
-		}
+//		if (collisionHandler.checkCollision(playerComponent, unbreakableObjects)) {
+//			playerComponent.newX(currentX);
+//			playerComponent.newY(currrentY);
+//		}
+//		
+//		if (collisionHandler.checkCollisionBreakables(playerComponent, breakableObjects)) 		{
+//			playerComponent.newX(currentX);
+//			playerComponent.newY(currrentY);
+//			pointChecker();
+//		}
 	}
 	
 	

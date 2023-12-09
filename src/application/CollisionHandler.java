@@ -8,12 +8,15 @@ import javafx.scene.shape.Rectangle;
 
 public class CollisionHandler {
 	
+	
+	
+	
 	/*
 	 * checkCollision
 	 * returns true if the player collides with an unbreakable
 	 * returns false if the player does not collide with unbreakable
 	 */
-	public boolean checkCollision(Player player, ArrayList<Rectangle> unbreakableObjects) {
+	public boolean checkCollisionUnbreakables(Player player, ArrayList<Rectangle> unbreakableObjects) {
         Bounds playerBounds = player.getPlayerBounds();
         
         for (Rectangle rectangle : unbreakableObjects) {
