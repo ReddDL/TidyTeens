@@ -84,7 +84,7 @@ public class PlayerController implements Initializable{
 
 	private ArrayList<Rectangle> unbreakableObjects = new ArrayList();
 	
-	private ArrayList<ImageView> breakableObjects;
+	private ArrayList<ImageView> breakableObjects = new ArrayList();
 	
 	Unbreakable unbreakable = new Unbreakable();
 	
@@ -95,9 +95,7 @@ public class PlayerController implements Initializable{
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		this.scene = scene;
-		playerComponent = new Player(player, x, y, lives, scoreCounter, unbreakableObjects);
-//		playerComponent.makeMovable(player, scene);
+		playerComponent = new Player(player, x, y, lives, scoreCounter, this);
 		
 		gameLoop = new AnimationTimer() {
 
@@ -107,17 +105,8 @@ public class PlayerController implements Initializable{
 				double currentY = player.getY();
 				
 				playerComponent.makeMovable(player, scene, unbreakableObjects);
-				if(collisionHandler.checkCollisionUnbreakables(player, unbreakableObjects)) {
-					player.setX(currentX);
-					player.setY(currentY);
-				}
-				
-				
-//				update();				
 			}	
 		};
-		
-//		load();
 		
 		gameLoop.start();
 		
@@ -144,7 +133,7 @@ public class PlayerController implements Initializable{
 		unbreakableObjects.add(LeftWall);
 		unbreakableObjects.add(BottomWall);
 		
-		breakableObjects = new ArrayList<>();
+//		breakableObjects = new ArrayList<>();
 
 		breakableObjects.add(breakable1);
 		breakableObjects.add(breakable2);
@@ -172,23 +161,18 @@ public class PlayerController implements Initializable{
 		breakableObjects.add(breakable24);
 	}
 	
-	// called every frame update
-	private void update() {
-//		double currentX = playerComponent.returnX();
-//		double currrentY = playerComponent.returnY();
-		playerComponent.makeMovable(player, scene, unbreakableObjects);
+	public void checkCollision(double currentX, double currentY) {
+		if (collisionHandler.checkCollisionUnbreakables(player, unbreakableObjects)) {
+			player.setLayoutX(currentX);
+			player.setLayoutY(currentY);
+		}
 		
-//		if (playerComponent.playerCollidesWithUnbreakable(unbreakableObjects)) {
-////			playerComponent.newX(currentX);
-////			playerComponent.newY(currrentY);
-//			playerComponent.timer.stop();
-//			
-//		} else {
-////			playerComponent.makeMovable(player, scene, unbreakableObjects);
-//			playerComponent.timer.start();
-//			
-//		}
-
+		if (collisionHandler.checkCollisionBreakables(player, breakableObjects) ) {
+			player.setLayoutX(currentX);
+			player.setLayoutY(currentY);
+			pointChecker();
+		}
+		
 	}
 	
 	/*
@@ -203,7 +187,6 @@ public class PlayerController implements Initializable{
 		System.out.println("PLAYER SCORE: " + playerComponent.getScore());
 		
 	}
-	
 	
 	
 	

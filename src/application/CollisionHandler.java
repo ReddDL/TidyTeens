@@ -43,8 +43,8 @@ public class CollisionHandler {
 	 * 
 	 * TODO: Can be used for bomb logic
 	 */
-	public boolean checkCollisionBreakables(Player player, ArrayList<ImageView> breakableObjects) {
-		Bounds playerBounds = player.getPlayerBounds();
+	public boolean checkCollisionBreakables(ImageView player, ArrayList<ImageView> breakableObjects) {
+		Bounds playerBounds = player.getBoundsInParent();
 		
 		for (ImageView breakable : breakableObjects) {
 			Bounds breakableBounds = breakable.getBoundsInParent();

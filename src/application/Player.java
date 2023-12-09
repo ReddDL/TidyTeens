@@ -15,7 +15,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 
 public class Player{
-//	private ImageView player;
 	@FXML private ImageView player;
 	@FXML AnchorPane scene;
 	private double x;
@@ -28,23 +27,19 @@ public class Player{
 	private BooleanProperty downPressed = new SimpleBooleanProperty();
 	
 	private BooleanBinding keyPressed = upPressed.or(leftPressed).or(rightPressed).or(downPressed);
-	
-	private boolean left, up, right, down;
-	boolean canMove = true;
-	
+		
 	private double movementVariable = 1;
 	
 	CollisionHandler collisionHandler = new CollisionHandler();
-	private ArrayList<Rectangle> unbreakableObjects;
+	PlayerController playerController;
 
-		
-    public Player(ImageView player, double x, double y, int lives, int scoreCounter, ArrayList<Rectangle> unbreakables) {
+    public Player(ImageView player, double x, double y, int lives, int scoreCounter, PlayerController playerController) {
         this.player = player;
         this.x = x;
         this.y = y;
         this.lives = lives;
         this.scoreCounter = scoreCounter;
-        this.unbreakableObjects = unbreakables;
+        this.playerController = playerController;
     }
     
     /* move
@@ -52,28 +47,6 @@ public class Player{
      * keypress 
      * 
      */
-//    public void move(KeyEvent e) {
-//        switch (e.getCode()) {
-//            case UP:
-//                System.out.println("Moved up");
-//                	player.setY(y -= 5);
-//                break;
-//            case DOWN:
-//                System.out.println("Moved down");
-//                player.setY(y += 5);
-//                break;
-//            case LEFT:
-//                System.out.println("Moved left");
-//                player.setX(x -= 5);
-//                break;
-//            case RIGHT:
-//                System.out.println("Moved right");
-//                player.setX(x += 5);
-//                break;
-//            default:
-//                break;
-//        }
-//    }
 	public void makeMovable(ImageView player, AnchorPane scene, ArrayList<Rectangle> unbreakableObjects) {
 		this.player = player;
 		this.scene = scene;
@@ -90,13 +63,12 @@ public class Player{
 	}
 	
 	AnimationTimer timer = new AnimationTimer() {
-//		double currentX = player.getLayoutX();
-//		double currentY = player.getLayoutY();
-//		
+
+		
 		@Override
 		public void handle(long timestamp) {
 			double currentX = player.getLayoutX();
-			double currrentY = player.getLayoutY();
+			double currentY = player.getLayoutY();
 			if(upPressed.get()) {
 				player.setLayoutY(player.getLayoutY() - movementVariable);
 			}
@@ -110,80 +82,38 @@ public class Player{
 				player.setLayoutX(player.getLayoutX() + movementVariable);
 		    }
 			
-//			if (playerCollidesWithUnbreakable()) {
-//				player.setLayoutX(currentX);
-//				player.setLayoutY(currentY);
-//			}
-			
-			if (collisionHandler.checkCollisionUnbreakables(player, unbreakableObjects)) {
-				player.setLayoutX(currentX);
-				player.setLayoutY(currrentY);
-			}
-		
-//			if (collisionHandler.checkCollisionBreakables(player, breakableObjects)) {
-//				player.setLayoutX(currentX);
-//				player.setLayoutY(currrentY);
-////				pointChecker();
-//			}
+			playerController.checkCollision(currentX, currentY);
 			
 		}
 	};
-	
-//	public boolean playerCollidesWithUnbreakable(double x, double y, ArrayList <Rectangle> unbreakables) {
-//		if (collisionHandler.checkCollisionUnbreakables(this, unbreakables)) {
-//			if(upPressed.get()) {
-//				player.setLayoutY(player.getLayoutY() + movementVariable);
-//			}
-//			if(downPressed.get()){
-//				player.setLayoutY(player.getLayoutY() - movementVariable);
-//			}
-//			if(leftPressed.get()){
-//				player.setLayoutX(player.getLayoutX() + movementVariable);
-//			}
-//			if(rightPressed.get()){
-//				player.setLayoutX(player.getLayoutX() - movementVariable);
-//			}
-//				return true;
-//			} else {
-//				return false;
-//			}
-//	}
 	
 	private void movementSetup(){
 		scene.setOnKeyPressed(e -> {
 			if(e.getCode() == KeyCode.W) {
 				upPressed.set(true);
-				up = true;
 			}
 			if(e.getCode() == KeyCode.A) {
 				leftPressed.set(true);
-				left = true;
 			}
 			if(e.getCode() == KeyCode.S) {
 				downPressed.set(true);
-				down = true;
 			}
 			if(e.getCode() == KeyCode.D) {
 				rightPressed.set(true);
-				right = true;
 			}
 		});
 		scene.setOnKeyReleased(e ->{
 			if(e.getCode() == KeyCode.W) {
 				upPressed.set(false);
-				up = true;
 			}
 			if(e.getCode() == KeyCode.A) {
 				leftPressed.set(false);
-				left = true;
 			}
 			if(e.getCode() == KeyCode.S) {
 				downPressed.set(false);
-				down = true;
 			}
 			if(e.getCode() == KeyCode.D) {
 				rightPressed.set(false);
-				right = true;
 			}
 		});
 	}

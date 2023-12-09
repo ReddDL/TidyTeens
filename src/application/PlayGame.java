@@ -45,7 +45,6 @@ public class PlayGame{
 			
 			
 			Scene scene = new Scene(root);
-//			PlayerController.initialize();
 			scene.getRoot().requestFocus();
 
 			scene.addEventFilter(KeyEvent.KEY_PRESSED, new AL());
