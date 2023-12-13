@@ -173,6 +173,7 @@ public class PlayerController implements Initializable{
 		Thread timerThread = new Thread(gameTimer);
 		///////////////////////////////////
 		gameLoop = new AnimationTimer() {
+			
 			long startTime = System.currentTimeMillis();
 //			boolean playerDamaged = false;
 			@Override
@@ -188,14 +189,15 @@ public class PlayerController implements Initializable{
 					didWin = false;
 					gameOver(didWin);
 					gameLoop.stop();
-					
+//					
 				}
 				
 				playerComponent.makeMovable(player, scene, unbreakableObjects);
+//				playerComponent.spawnBomb(player, scene);
 //				Enemy.makeEnemiesMove(initializedEnemies, unbreakableObjects);
-				enemy1Component.moveEnemy(playerComponent, unbreakableObjects);
-				enemy2Component.moveEnemy(playerComponent, unbreakableObjects);
-				enemy3Component.moveEnemy(playerComponent, unbreakableObjects);
+//				enemy1Component.moveEnemy(playerComponent, unbreakableObjects);
+//				enemy2Component.moveEnemy(playerComponent, unbreakableObjects);
+//				enemy3Component.moveEnemy(playerComponent, unbreakableObjects);
 
 				// if enemies hit player
 				if (collisionHandler.enemyCollision(playerComponent, initializedEnemies) && playerComponent.getCanBeDamaged()) {
