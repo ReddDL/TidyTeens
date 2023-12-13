@@ -29,7 +29,10 @@ public class PlayerController implements Initializable{
 	private double y = 0;
 	private int scoreCounter = 0;
 	
-	@FXML private int lives;
+	@FXML private ImageView heart1;
+	@FXML private ImageView heart2;
+	@FXML private ImageView heart3;
+	
 	@FXML private Text score;
 	
 	@FXML private Rectangle Bed;
@@ -79,6 +82,8 @@ public class PlayerController implements Initializable{
 	@FXML private ImageView breakable22;
 	@FXML private ImageView breakable23;
 	@FXML private ImageView breakable24;
+	
+	private ArrayList<ImageView> hearts;
 
 //	Unbreakable unbreakable = new Unbreakable();
 	private ArrayList<Rectangle> unbreakableObjects;
@@ -100,12 +105,13 @@ public class PlayerController implements Initializable{
 	
 	private losingPage losingStage;
 	boolean didWin = false;
+	boolean playerDamaged = false;
 		
 	
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		playerComponent = new Player(player, x, y, lives, scoreCounter, this);
+		playerComponent = new Player(player, x, y, 3, scoreCounter, this);
 		
 		// add the unbreakable objects
 		unbreakableObjects = new ArrayList<Rectangle>(){{
@@ -128,39 +134,65 @@ public class PlayerController implements Initializable{
 			add(breakable19); add(breakable20); add(breakable21);
 			add(breakable22); add(breakable23); add(breakable24);
 		}};
+		// heart images
+		hearts = new ArrayList<ImageView>() {{
+			add(heart1); add(heart2); add(heart3);
+		}};
 
 		//////////////////////////////////
 		enemyImages = new ArrayList<ImageView>() {{
 			add(enemy1); add(enemy2); add(enemy3);
 		}};
+		
+		Enemy enemy1Component = new Enemy(enemy1, x, y);
+		Enemy enemy2Component = new Enemy(enemy2, x, y);
+		Enemy enemy3Component = new Enemy(enemy3, x, y);
+		
+		initializedEnemies = new ArrayList<Enemy>() {{
+			add(enemy1Component); add(enemy2Component); add(enemy3Component);
+		}};
 
-		initializedEnemies = Enemy.generateEnemies(enemyImages, playerComponent);
 
-		for(Enemy enemy: initializedEnemies) {
-			System.out.println(enemy.getImageView().getId());
-		}
+//		initializedEnemies = Enemy.generateEnemies(enemyImages, playerComponent);
+
+//		for(Enemy enemy: initializedEnemies) {
+//			System.out.println(enemy.getImageView().getId());
+//		}
 		random = new Random();
 		GameTimer gameTimer = new GameTimer();
 		Thread timerThread = new Thread(gameTimer);
 		///////////////////////////////////
 		gameLoop = new AnimationTimer() {
 			long startTime = System.currentTimeMillis();
+//			boolean playerDamaged = false;
 			@Override
 			public void handle(long arg0) {
-				
-				playerComponent.makeMovable(player, scene, unbreakableObjects);
-				Enemy.makeEnemiesMove(initializedEnemies, unbreakableObjects);
-				
+				// lazy timer
 				long elapsedMilliseconds = System.currentTimeMillis() - startTime;
 				double elapsedSeconds = (double) elapsedMilliseconds / 1000;
-				System.out.println("ELAPSED TIME: " + elapsedSeconds);
+//				System.out.println("ELAPSED TIME: " + elapsedSeconds);
 				
-				if (elapsedSeconds >= 5) {
+				// losing conditions
+				if (elapsedSeconds >= 15 || playerComponent.getLives() == 0) {
 					didWin = false;
 					gameOver(didWin);
 					gameLoop.stop();
-						
+					
 				}
+				
+				playerComponent.makeMovable(player, scene, unbreakableObjects);
+//				Enemy.makeEnemiesMove(initializedEnemies, unbreakableObjects);
+				enemy1Component.moveEnemy(playerComponent, unbreakableObjects);
+				enemy2Component.moveEnemy(playerComponent, unbreakableObjects);
+				enemy3Component.moveEnemy(playerComponent, unbreakableObjects);
+
+				// if enemies hit player
+				if(collisionHandler.enemyCollision(playerComponent, initializedEnemies)) {
+					playerComponent.damagePlayer();
+//					playerDamaged = true;
+//					break;
+				}
+				
 			}	
 		};
 		

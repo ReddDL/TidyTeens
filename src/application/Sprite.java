@@ -37,7 +37,7 @@ public class Sprite {
 	}
 
 	public Bounds getBounds() {
-		return imageview.getBoundsInLocal();
+		return getImageView().getBoundsInParent();
 	}
 	
 }

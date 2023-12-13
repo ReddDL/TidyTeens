@@ -61,10 +61,10 @@ public class CollisionHandler {
 		return false;
 	}
 
-	public boolean enemyCollision(ImageView player, ArrayList<Enemy> enemies) {
+	public boolean enemyCollision(Player player, ArrayList<Enemy> enemies) {
 		for(Enemy e: enemies) {
-			ImageView enemyImage = e.getImageView();
-			if(player.getBoundsInLocal().intersects(enemyImage.getBoundsInLocal())) {
+			Bounds enemyBounds = e.getBounds();
+			if(player.getPlayerBounds().intersects(enemyBounds)) {
 				System.out.println("Player colliding with enemy.");
 				return true;
 			}

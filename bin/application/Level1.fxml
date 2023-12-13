@@ -181,5 +181,20 @@
             <Image url="@../images/1.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="heart1" fitHeight="80.0" fitWidth="81.0" layoutX="811.0" layoutY="552.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/heart.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="heart2" fitHeight="80.0" fitWidth="81.0" layoutX="929.0" layoutY="553.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/heart.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="heart3" fitHeight="80.0" fitWidth="81.0" layoutX="1044.0" layoutY="553.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/heart.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

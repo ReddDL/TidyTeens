@@ -35,7 +35,7 @@ public class Player extends Sprite{
 
     public Player(ImageView player, double x, double y, int lives, int scoreCounter, PlayerController playerController) {
         super(x,y,player);
-        this.lives = 1;
+        this.lives = lives;
         this.scoreCounter = scoreCounter;
         this.playerController = playerController;
     }
@@ -116,6 +116,14 @@ public class Player extends Sprite{
 		});
 	}
 	
+	public void damagePlayer() {
+		System.out.println("PLAYER LIVES: " + this.lives);
+		this.lives--;
+	}
+	
+	public int getLives() {
+		return this.lives;
+	}
     public int getScore() {
     		return this.scoreCounter;
     }
@@ -124,9 +132,9 @@ public class Player extends Sprite{
     		this.scoreCounter++;
     }
     
-    public Bounds getPlayerBounds() {
-        return player.getBoundsInParent();
-    }
+//    public Bounds getPlayerBounds() {
+//        return player.getBoundsInParent();
+//    }
 
 
 }
