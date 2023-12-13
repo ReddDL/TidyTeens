@@ -12,8 +12,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
-public class variableCreation implements EventHandler<ActionEvent> {
+public class variableCreation{
 	// TODO: Create stage creator method
 	// BUTTON STYLES
 	public static final int BUTTON_HEIGHT = 60;
@@ -34,14 +35,17 @@ public class variableCreation implements EventHandler<ActionEvent> {
         return button;
 	}
 	
+	public Text createText(String inputText) {
+		Text text = new Text();
+		text.setText(inputText);
+		text.setFont(this.getFont(FONT_CSGORDON_REGULAR, BUTTON_HEIGHT));
+		return text;
+	}
+	
 	// This method sets the font style and size
 	Font getFont(String path, int size) {
 		return Font.loadFont(getClass().getResourceAsStream(path), size);
 	}
-
-	@Override
-	public void handle(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	
+	
 }

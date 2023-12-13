@@ -209,7 +209,7 @@ public class PlayerController implements Initializable{
 		if (didWin) {
 			System.out.println("You won");
 		} else {
-			losingPage losingStage = new losingPage();
+			losingPage losingStage = new losingPage(playerComponent.getScore());
 			losingStage.setStage(stage);
 		}
 	}
