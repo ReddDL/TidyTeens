@@ -184,6 +184,7 @@ public class PlayerController implements Initializable{
 				
 				// losing conditions
 				if (elapsedSeconds >= 15 || playerComponent.getLives() == 0) {
+					System.out.println("GAME OVER");
 					didWin = false;
 					gameOver(didWin);
 					gameLoop.stop();
@@ -202,6 +203,15 @@ public class PlayerController implements Initializable{
                     playerComponent.damagePlayer();
                     playerComponent.setCanBeDamaged(false);
                     damageCooldown.playFromStart();
+                    
+                    if (playerComponent.getLives() == 2) {
+                    	heart3.setImage(null);
+                    } else if(playerComponent.getLives() == 1) {
+                    	heart2.setImage(null);
+                    } else if (playerComponent.getLives() == 0) {
+                    	heart1.setImage(null);
+                    }
+                    
                 }
 				
 			}	
