@@ -64,8 +64,8 @@ public class CollisionHandler {
 	public boolean enemyCollision(Player player, ArrayList<Enemy> enemies) {
 		for(Enemy e: enemies) {
 			Bounds enemyBounds = e.getBounds();
-			if(player.getPlayerBounds().intersects(enemyBounds)) {
-				System.out.println("Player colliding with enemy.");
+			if(player.getBounds().intersects(enemyBounds)) {
+//				System.out.println("Player colliding with enemy.");
 				return true;
 			}
 		}

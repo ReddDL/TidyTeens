@@ -6,6 +6,9 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 import javafx.animation.AnimationTimer;
+import javafx.animation.KeyFrame;
+import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
@@ -14,6 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 
 public class PlayerController implements Initializable{
@@ -106,12 +110,18 @@ public class PlayerController implements Initializable{
 	private losingPage losingStage;
 	boolean didWin = false;
 	boolean playerDamaged = false;
-		
-	
+//    private PauseTransition damageCooldown;
+    private Timeline damageCooldown;
+
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		playerComponent = new Player(player, x, y, 3, scoreCounter, this);
+		
+		 damageCooldown = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
+	            playerComponent.setCanBeDamaged(true);
+	        }));
+	        damageCooldown.setCycleCount(1);
 		
 		// add the unbreakable objects
 		unbreakableObjects = new ArrayList<Rectangle>(){{
@@ -187,11 +197,12 @@ public class PlayerController implements Initializable{
 				enemy3Component.moveEnemy(playerComponent, unbreakableObjects);
 
 				// if enemies hit player
-				if(collisionHandler.enemyCollision(playerComponent, initializedEnemies)) {
-					playerComponent.damagePlayer();
-//					playerDamaged = true;
-//					break;
-				}
+				if (collisionHandler.enemyCollision(playerComponent, initializedEnemies) && playerComponent.getCanBeDamaged()) {
+					System.out.println("PLAYER DAMAGED");
+                    playerComponent.damagePlayer();
+                    playerComponent.setCanBeDamaged(false);
+                    damageCooldown.playFromStart();
+                }
 				
 			}	
 		};

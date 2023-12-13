@@ -21,6 +21,9 @@ public class Player extends Sprite{
 	private double y;
 	private int lives;
 	private int scoreCounter;
+	
+	private boolean canBeDamaged = true;
+	
 	private BooleanProperty upPressed = new SimpleBooleanProperty();
 	private BooleanProperty leftPressed = new SimpleBooleanProperty();
 	private BooleanProperty rightPressed = new SimpleBooleanProperty();
@@ -117,8 +120,8 @@ public class Player extends Sprite{
 	}
 	
 	public void damagePlayer() {
-		System.out.println("PLAYER LIVES: " + this.lives);
 		this.lives--;
+		System.out.println("PLAYER LIVES: " + this.lives);
 	}
 	
 	public int getLives() {
@@ -132,9 +135,13 @@ public class Player extends Sprite{
     		this.scoreCounter++;
     }
     
-//    public Bounds getPlayerBounds() {
-//        return player.getBoundsInParent();
-//    }
-
+    public boolean getCanBeDamaged() {
+    		return this.canBeDamaged;
+    }
+    
+    public void setCanBeDamaged(boolean value) {
+    		this.canBeDamaged = value;
+    }
+    
 
 }
