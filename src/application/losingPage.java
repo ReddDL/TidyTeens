@@ -24,20 +24,31 @@ public class losingPage {
 	
 	variableCreation variableCreation = new variableCreation();
 	
-	public losingPage(MainMenu mainMenu){
-		this.mainMenu = mainMenu;
+	public losingPage(){
+//		this.mainMenu = mainMenu;
 		// STAGE INITIALIZATIONS
 		// TODO: Simplify this
 		this.root = new Group();
 		this.scene = new Scene(root,SCREEN_WIDTH,SCREEN_HEIGHT);
 		
-		Image background = new Image("images/losingScreen.png");
-		ImageView backgroundView = new ImageView(background);
+		background = new Image("images/losingScreen.png");
+		backgroundView = new ImageView(this.background);
 		
 		addComponents();
 	}
 	
 	public void addComponents() {
 		this.root.getChildren().add(backgroundView);
+	}
+	
+	public void setStage(Stage stage) {
+		
+		// STAGE INITIALIZATIONS
+		// TODO: Simplify this 
+		this.stage = stage;
+		this.stage.setTitle("Tidy Teens - Losing stage");
+		this.stage.setScene(scene);
+		this.stage.show();
+		
 	}
 }

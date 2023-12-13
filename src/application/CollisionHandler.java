@@ -24,7 +24,7 @@ public class CollisionHandler {
 //            		System.out.println("There is a collision with " + rectangle.getId());		
 //            	System.out.println("PLAYER BOUNDS: " + playerBounds);
 //            	System.out.println("PLAYER BOUNDS + 1: " + playerBounds + 1);
-            	System.out.println("You can't go there!");
+//            	System.out.println("You can't go there!");
             	return true;
             } 
         }
@@ -56,6 +56,17 @@ public class CollisionHandler {
 				breakable.setImage(null);
 				return true;
 				}
+			}
+		}
+		return false;
+	}
+
+	public boolean enemyCollision(ImageView player, ArrayList<Enemy> enemies) {
+		for(Enemy e: enemies) {
+			ImageView enemyImage = e.getImageView();
+			if(player.getBoundsInLocal().intersects(enemyImage.getBoundsInLocal())) {
+				System.out.println("Player colliding with enemy.");
+				return true;
 			}
 		}
 		return false;

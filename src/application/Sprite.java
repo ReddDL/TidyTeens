@@ -1,5 +1,6 @@
 package application;
 
+import javafx.geometry.Bounds;
 import javafx.scene.image.ImageView;
 
 public class Sprite {
@@ -34,6 +35,9 @@ public class Sprite {
 	public void setY(double y) {
 		this.y = y;
 	}
-	
+
+	public Bounds getBounds() {
+		return imageview.getBoundsInLocal();
+	}
 	
 }

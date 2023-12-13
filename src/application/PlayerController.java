@@ -2,15 +2,18 @@ package application;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 
 public class PlayerController implements Initializable{
@@ -20,6 +23,7 @@ public class PlayerController implements Initializable{
 	private Player playerComponent;
 	
 	@FXML private AnchorPane scene;
+	private Stage stage;
 	
 	private double x = 0;
 	private double y = 0;
@@ -77,80 +81,96 @@ public class PlayerController implements Initializable{
 	@FXML private ImageView breakable24;
 
 //	Unbreakable unbreakable = new Unbreakable();
-	private ArrayList<Rectangle> unbreakableObjects = new ArrayList<>();
+	private ArrayList<Rectangle> unbreakableObjects;
 	
-	private ArrayList<ImageView> breakableObjects = new ArrayList<>();
+	private ArrayList<ImageView> breakableObjects;
 	
-	
+	///////////////////////////////////
+	@FXML private ImageView enemy1;
+	@FXML private ImageView enemy2;
+	@FXML private ImageView enemy3;
+	private ArrayList<ImageView> enemyImages;
+	private ArrayList<Enemy> initializedEnemies;
+	private Random random;
+	///////////////////////////////////
+
 	CollisionHandler collisionHandler = new CollisionHandler();
 	
 	AnimationTimer gameLoop;
+	
+	private losingPage losingStage;
+	boolean didWin = false;
+		
 	
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		playerComponent = new Player(player, x, y, lives, scoreCounter, this);
 		
-		gameLoop = new AnimationTimer() {
+		// add the unbreakable objects
+		unbreakableObjects = new ArrayList<Rectangle>(){{
+			add(Bed); add(Cabinet1); add(Shelf1); add(Shelf2);
+			add(Box1); add(Box2); add(Box3); add(Box4);
+			add(Plant); add(TVset); add(chair1); add(chair2);
+			add(Table1); add(Desk1); add(Desk2); add(Box5);
+			add(Box6); add(Cabinet2); add(RightWall); add(TopWall);
+			add(LeftWall); add(BottomWall);
+		}};
+		
+		// add the breakable objects
+		breakableObjects = new ArrayList<ImageView>() {{
+			add(breakable1); add(breakable2); add(breakable3);
+			add(breakable4); add(breakable5); add(breakable6);
+			add(breakable7); add(breakable8); add(breakable9);
+			add(breakable10); add(breakable11); add(breakable12);
+			add(breakable13); add(breakable14); add(breakable15);
+			add(breakable16); add(breakable17); add(breakable18);
+			add(breakable19); add(breakable20); add(breakable21);
+			add(breakable22); add(breakable23); add(breakable24);
+		}};
 
+		//////////////////////////////////
+		enemyImages = new ArrayList<ImageView>() {{
+			add(enemy1); add(enemy2); add(enemy3);
+		}};
+
+		initializedEnemies = Enemy.generateEnemies(enemyImages, playerComponent);
+
+		for(Enemy enemy: initializedEnemies) {
+			System.out.println(enemy.getImageView().getId());
+		}
+		random = new Random();
+		GameTimer gameTimer = new GameTimer();
+		Thread timerThread = new Thread(gameTimer);
+		///////////////////////////////////
+		gameLoop = new AnimationTimer() {
+			long startTime = System.currentTimeMillis();
 			@Override
 			public void handle(long arg0) {
 				
 				playerComponent.makeMovable(player, scene, unbreakableObjects);
+				Enemy.makeEnemiesMove(initializedEnemies, unbreakableObjects);
+				
+				long elapsedMilliseconds = System.currentTimeMillis() - startTime;
+				double elapsedSeconds = (double) elapsedMilliseconds / 1000;
+				System.out.println("ELAPSED TIME: " + elapsedSeconds);
+				
+				if (elapsedSeconds >= 5) {
+					didWin = false;
+					gameOver(didWin);
+					gameLoop.stop();
+						
+				}
 			}	
 		};
 		
 		gameLoop.start();
-		
-		// add the unbreakable objects
-		unbreakableObjects.add(Bed);
-		unbreakableObjects.add(Cabinet1);
-		unbreakableObjects.add(Shelf1);
-		unbreakableObjects.add(Shelf2);
-		unbreakableObjects.add(Box1);
-		unbreakableObjects.add(Box2);
-		unbreakableObjects.add(Box3);
-		unbreakableObjects.add(Box4);
-		unbreakableObjects.add(Plant);
-		unbreakableObjects.add(TVset);
-		unbreakableObjects.add(chair1);
-		unbreakableObjects.add(chair2);
-		unbreakableObjects.add(Table1);
-		unbreakableObjects.add(Desk1);
-		unbreakableObjects.add(Desk2);
-		unbreakableObjects.add(Box5);
-		unbreakableObjects.add(Box6);
-		unbreakableObjects.add(Cabinet2);
-		unbreakableObjects.add(RightWall);
-		unbreakableObjects.add(TopWall);
-		unbreakableObjects.add(LeftWall);
-		unbreakableObjects.add(BottomWall);
-		
-		// add the breakable objects
-		breakableObjects.add(breakable1);
-		breakableObjects.add(breakable2);
-		breakableObjects.add(breakable3);
-		breakableObjects.add(breakable4);
-		breakableObjects.add(breakable5);
-		breakableObjects.add(breakable6);
-		breakableObjects.add(breakable7);
-		breakableObjects.add(breakable8);
-		breakableObjects.add(breakable9);
-		breakableObjects.add(breakable10);
-		breakableObjects.add(breakable11);
-		breakableObjects.add(breakable12);
-		breakableObjects.add(breakable13);
-		breakableObjects.add(breakable14);
-		breakableObjects.add(breakable15);
-		breakableObjects.add(breakable16);
-		breakableObjects.add(breakable17);
-		breakableObjects.add(breakable18);
-		breakableObjects.add(breakable19);
-		breakableObjects.add(breakable20);
-		breakableObjects.add(breakable21);
-		breakableObjects.add(breakable22);
-		breakableObjects.add(breakable23);
-		breakableObjects.add(breakable24);
+//		 try {
+//     		timerThread.join();
+//
+//		 } catch (InterruptedException e) {
+//			 Thread.currentThread().interrupt();
+//		 }
 	}
 	
 	public void checkCollision(double currentX, double currentY) {
@@ -165,6 +185,7 @@ public class PlayerController implements Initializable{
 			pointChecker();
 		}
 		
+//		collisionHandler.enemyCollixsion(player, initializedEnemies);
 	}
 	
 	/*
@@ -180,6 +201,17 @@ public class PlayerController implements Initializable{
 		
 	}
 	
+	public void setStage(Stage stage) {
+		this.stage = stage;
+	}
 	
+	private void gameOver(boolean didWin) {
+		if (didWin) {
+			System.out.println("You won");
+		} else {
+			losingPage losingStage = new losingPage();
+			losingStage.setStage(stage);
+		}
+	}
 	
 }

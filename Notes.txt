@@ -1,0 +1,10 @@
+Added:
+- Enemy movement
+- Enemy player tracking
+- Enemy player collision
+
+To Fix:
+- Enemy to enemy collision to prevent overlapping
+
+To Add:
+- Enemy model changing directions depending on xmod and ymod

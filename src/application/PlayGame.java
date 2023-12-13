@@ -43,8 +43,9 @@ public class PlayGame{
 			Parent root = loader.load();
 			PlayerController = loader.getController();
 			
+			PlayerController.setStage(stage);
 			Scene scene = new Scene(root);
-			scene.getRoot().requestFocus();			
+			scene.getRoot().requestFocus();		
 			
 			this.stage = stage;
 			this.stage.setTitle("Tidy Teens - Play Game");

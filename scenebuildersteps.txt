@@ -1,0 +1,38 @@
+To properly use SceneBuilder with VSCode:
+
+1. Install SceneBuilder from Gluon
+2. Instal the SceneBuilder extension from the VSCode extension library.
+3. Create an FXML file. Preferably in the same package as the java
+file it is supposed to modify. Name it similarly to the java file.
+(e.g. Main.java should have a corresponding Main.FXML)
+4. In the start method in your main, add this code (you can
+alternatively use Throws Exception instead of a try catch block)
+public void start(Stage primaryStage) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("<Insert complete FXML file name here>"));
+            Scene scene = new Scene(root);
+
+            primaryStage.setTitle("Window Title");
+
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+5. To edit the FXML file using SceneBuilder, you can right click on the
+FXML file and select the open with SceneBuilder option.
+6. The primary java file that you are dealing with is referred to as a
+Controller class. You will use this to hold all the expected variables
+and functions in your scene.
+7. You need to use @FXML in your controller class to "inject" the FXML
+to the controller class.
+8. In SceneBuilder, at the lower left corner, you need to select the
+controller class that you would use to modify the scene.
+9. Add all the elements that you want to use in the FXML file to your
+Controller class. (e.g. if you want to have a shape in your SceneBuilder
+to mess with, you first need to make a Circle myCircle; attribute in your
+controller class)
+10. In SceneBuilder, you can tie these elements by giving them the ID you
+gave to the element in your Controller file. This can be found on the
+right-hand side.

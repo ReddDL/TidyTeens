@@ -42,7 +42,7 @@ public class Player extends Sprite{
     
     /* move
      * moves the player in the direction of the 
-     * keypress 
+     * keypress    
      * 
      */
 	public void makeMovable(ImageView player, AnchorPane scene, ArrayList<Rectangle> unbreakableObjects) {
@@ -115,6 +115,7 @@ public class Player extends Sprite{
 			}
 		});
 	}
+	
     public int getScore() {
     		return this.scoreCounter;
     }
