@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ProgressBar;
@@ -189,7 +190,11 @@ public class PlayerController implements Initializable{
 		            System.out.println("Remaining time: " + elapsedSeconds);
 		            lastPrintTime = System.currentTimeMillis();
 		        }
-				
+		        
+		        // computes the progress and updates the timer bar
+		        double progress = elapsedSeconds / (TOTAL_DURATION / 1000);		        
+				timeBar.setProgress(progress);
+
 				// losing conditions
 				if (elapsedSeconds <= 0|| playerComponent.getLives() == 0) {
 					System.out.println("GAME OVER");
@@ -209,9 +214,9 @@ public class PlayerController implements Initializable{
 				
 				// moves player and enemmies
 				playerComponent.makeMovable(player, scene);
-				enemy1Component.moveEnemy(playerComponent, unbreakableObjects, breakableObjects);
-				enemy2Component.moveEnemy(playerComponent, unbreakableObjects, breakableObjects);
-				enemy3Component.moveEnemy(playerComponent, unbreakableObjects, breakableObjects);
+//				enemy1Component.moveEnemy(playerComponent, unbreakableObjects, breakableObjects);
+//				enemy2Component.moveEnemy(playerComponent, unbreakableObjects, breakableObjects);
+//				enemy3Component.moveEnemy(playerComponent, unbreakableObjects, breakableObjects);
 				
 				// checks if the player can drop a bomb and runs an additional checker
 				if(!playerComponent.getCanDropBomb()) {
