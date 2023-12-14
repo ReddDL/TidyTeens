@@ -1,13 +1,18 @@
+/*
+ * PlayerController
+ * 
+ * - Handles the game logic
+ * 
+ */
+
+
 package application;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.ResourceBundle;
-
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
-import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -29,6 +34,7 @@ public class PlayerController implements Initializable{
 	@FXML private AnchorPane scene;
 	private Stage stage;
 	
+	// Player initialization
 	private double x = 0;
 	private double y = 0;
 	private int scoreCounter = 0;
@@ -36,12 +42,14 @@ public class PlayerController implements Initializable{
 	@FXML private ImageView heart1;
 	@FXML private ImageView heart2;
 	@FXML private ImageView heart3;
-	
+	// Bomb images
 	private Image waterSplash = new Image("images/waterSplash.gif", 100,100, true, true);
 	private ImageView waterSplashView = new ImageView(waterSplash);
 	
+	// The text
 	@FXML private Text score;
 	
+	// Unbreakable images
 	@FXML private Rectangle Bed;
 	@FXML private Rectangle Plant;
 	@FXML private Rectangle Shelf1;
@@ -65,6 +73,7 @@ public class PlayerController implements Initializable{
 	@FXML private Rectangle LeftWall;
 	@FXML private Rectangle BottomWall;
 	
+	// Breakable images
 	@FXML private ImageView breakable1;
 	@FXML private ImageView breakable2;
 	@FXML private ImageView breakable3;
@@ -90,20 +99,17 @@ public class PlayerController implements Initializable{
 	@FXML private ImageView breakable23;
 	@FXML private ImageView breakable24;
 	
-	private ArrayList<ImageView> hearts;
-
-//	Unbreakable unbreakable = new Unbreakable();
-	private ArrayList<Rectangle> unbreakableObjects;
-	
-	private ArrayList<ImageView> breakableObjects;
-	
-	///////////////////////////////////
+	// Enemy images
 	@FXML private ImageView enemy1;
 	@FXML private ImageView enemy2;
 	@FXML private ImageView enemy3;
-	private ArrayList<ImageView> enemyImages;
+	
+	private ArrayList<ImageView> hearts;
+	private ArrayList<Rectangle> unbreakableObjects;	
+	private ArrayList<ImageView> breakableObjects;
+//	private ArrayList<ImageView> enemyImages;
 	private ArrayList<Enemy> initializedEnemies;
-	private Random random;
+//	private Random random;
 	///////////////////////////////////
 
 	CollisionHandler collisionHandler = new CollisionHandler();
@@ -113,13 +119,13 @@ public class PlayerController implements Initializable{
 	private losingPage losingStage;
 	boolean didWin = false;
 	boolean playerDamaged = false;
-//    private PauseTransition damageCooldown;
     private Timeline damageCooldown;
+    private int breakableNum = 24;
 
+    private static final long TOTAL_DURATION = 180 * 1000;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-//		Bomb bomb = new Bomb(bombImageView, x, y);
 		playerComponent = new Player(player, x, y, 3, scoreCounter, waterSplashView, this);
 		
 		 damageCooldown = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
@@ -128,7 +134,7 @@ public class PlayerController implements Initializable{
 	        damageCooldown.setCycleCount(1);
 		
 		// add the unbreakable objects
-		unbreakableObjects = new ArrayList<Rectangle>(){{
+		unbreakableObjects = new ArrayList<Rectangle>() {{
 			add(Bed); add(Cabinet1); add(Shelf1); add(Shelf2);
 			add(Box1); add(Box2); add(Box3); add(Box4);
 			add(Plant); add(TVset); add(chair1); add(chair2);
@@ -149,14 +155,14 @@ public class PlayerController implements Initializable{
 			add(breakable22); add(breakable23); add(breakable24);
 		}};
 		// heart images
-		hearts = new ArrayList<ImageView>() {{
-			add(heart1); add(heart2); add(heart3);
-		}};
+//		hearts = new ArrayList<ImageView>() {{
+//			add(heart1); add(heart2); add(heart3);
+//		}};
 
-		//////////////////////////////////
-		enemyImages = new ArrayList<ImageView>() {{
-			add(enemy1); add(enemy2); add(enemy3);
-		}};
+		
+//		enemyImages = new ArrayList<ImageView>() {{
+//			add(enemy1); add(enemy2); add(enemy3);
+//		}};
 		
 		Enemy enemy1Component = new Enemy(enemy1, x, y);
 		Enemy enemy2Component = new Enemy(enemy2, x, y);
@@ -166,53 +172,51 @@ public class PlayerController implements Initializable{
 			add(enemy1Component); add(enemy2Component); add(enemy3Component);
 		}};
 
-
-//		initializedEnemies = Enemy.generateEnemies(enemyImages, playerComponent);
-
-//		for(Enemy enemy: initializedEnemies) {
-//			System.out.println(enemy.getImageView().getId());
-//		}
-		random = new Random();
-		GameTimer gameTimer = new GameTimer();
-		Thread timerThread = new Thread(gameTimer);
+//		Random random = new Random();
 		///////////////////////////////////
 		gameLoop = new AnimationTimer() {
-			
 			long startTime = System.currentTimeMillis();
-//			boolean playerDamaged = false;
+			long lastPrintTime = startTime;
+			
 			@Override
 			public void handle(long arg0) {
+				
 				// lazy timer
-				long elapsedMilliseconds = System.currentTimeMillis() - startTime;
+				long elapsedMilliseconds = TOTAL_DURATION - (System.currentTimeMillis() - startTime);
 				double elapsedSeconds = (double) elapsedMilliseconds / 1000;
-//				System.out.println("ELAPSED TIME: " + elapsedSeconds);
+		        if (System.currentTimeMillis() - lastPrintTime >= 30 * 1000) {
+		            System.out.println("Remaining time: " + elapsedSeconds);
+		            lastPrintTime = System.currentTimeMillis();
+		        }
 				
 				// losing conditions
-				if (elapsedSeconds >= 300|| playerComponent.getLives() == 0) {
+				if (elapsedSeconds <= 0|| playerComponent.getLives() == 0) {
 					System.out.println("GAME OVER");
 					didWin = false;
 					gameOver(didWin);
 					gameLoop.stop();
-//					
+			
 				}
 				
+				// win condition
+				if (breakableNum == 0) {
+					System.out.println("YOU WON THE GAME");
+					didWin = true;
+					gameOver(didWin);
+					gameLoop.stop();
+				}
 				
-				playerComponent.makeMovable(player, scene, unbreakableObjects);
-//				playerComponent.spawnBomb(player, scene);
-//				Enemy.makeEnemiesMove(initializedEnemies, unbreakableObjects);
+				// moves player and enemmies
+				playerComponent.makeMovable(player, scene);
 				enemy1Component.moveEnemy(playerComponent, unbreakableObjects, breakableObjects);
 				enemy2Component.moveEnemy(playerComponent, unbreakableObjects, breakableObjects);
 				enemy3Component.moveEnemy(playerComponent, unbreakableObjects, breakableObjects);
 				
-//				if (playerComponent.getCanDropBomb()) {
-//					Bomb bomb = new Bomb(waterSplashView, playerComponent.getX(), playerComponent.getY());
-//					playerComponent.dropBomb();
-//				}
-				
+				// checks if the player can drop a bomb and runs an additional checker
 				if(!playerComponent.getCanDropBomb()) {
-//					System.out.println("Player just dropped a bomb");
 					if(collisionHandler.bombBreakableCollision(playerComponent.bombImage, breakableObjects)) {
-						pointChecker();
+						pointChecker(TOTAL_DURATION, elapsedSeconds);
+						breakableNum--;
 					}
 				}
 				
@@ -237,14 +241,13 @@ public class PlayerController implements Initializable{
 		};
 		
 		gameLoop.start();
-//		 try {
-//     		timerThread.join();
-//
-//		 } catch (InterruptedException e) {
-//			 Thread.currentThread().interrupt();
-//		 }
 	}
 	
+	/*
+	 * checkCollision()
+	 * - handles the player collisions and returns the player to the previous position if there was a collision
+	 * 
+	 */
 	public void checkCollision(double currentX, double currentY) {
 		if (collisionHandler.checkCollisionUnbreakables(player, unbreakableObjects)) {
 			player.setLayoutX(currentX);
@@ -254,21 +257,21 @@ public class PlayerController implements Initializable{
 		if (collisionHandler.checkCollisionBreakables(player, breakableObjects) ) {
 			player.setLayoutX(currentX);
 			player.setLayoutY(currentY);
-//			pointChecker();
 		}
 		
-//		collisionHandler.enemyCollixsion(player, initializedEnemies);
 	}
 	
+			
+			
 	/*
-	 * move 
-	 * checks for keypresses in the scene
-	 * stores the current x and y and if there is a collision, returns the player 
-	 * to their previous position
+	 * pointChecker()
+	 * - computes the points obtained depending on the time
+	 * - increments the score of the player
+	 * - updates the text on the scene
 	 */
-	
-	private void pointChecker() {
-		playerComponent.incrementScore();		
+	private void pointChecker(double totalTime, double currentTime) {
+		int scoreComputation = (int) ((TOTAL_DURATION - currentTime) * 2 ) / 1500;
+		playerComponent.incrementScore(scoreComputation);		
 		score.setText(String.valueOf(playerComponent.getScore()));
 		System.out.println("PLAYER SCORE: " + playerComponent.getScore());
 		
@@ -278,9 +281,15 @@ public class PlayerController implements Initializable{
 		this.stage = stage;
 	}
 	
+	/*
+	 * gameOver()
+	 * - sets the scene depending if the player won or loss the game
+	 * 
+	 */
 	private void gameOver(boolean didWin) {
 		if (didWin) {
-			System.out.println("You won");
+			winningPage winningStage = new winningPage(playerComponent.getScore());
+			winningStage.setStage(stage);
 		} else {
 			losingPage losingStage = new losingPage(playerComponent.getScore());
 			losingStage.setStage(stage);

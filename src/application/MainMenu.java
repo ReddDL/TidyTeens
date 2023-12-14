@@ -5,18 +5,14 @@
  */
 
 package application;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
-import javafx.event.ActionEvent;
 import javafx.scene.Group; // Import Group
-import javafx.scene.paint.Color;
 
 public class MainMenu implements EventHandler<ActionEvent>{
 	
@@ -48,13 +44,16 @@ public class MainMenu implements EventHandler<ActionEvent>{
 	
 	variableCreation variableCreation = new variableCreation();
 	
-	public MainMenu() {
+	public MainMenu(Stage stage) {
 		this.root = new Group();
 		this.scene = new Scene(root,SCREEN_WIDTH,SCREEN_HEIGHT);
+		this.stage = stage;
+		this.stage.setResizable(false);
 		
 		// Add the splashscreen image
 		this.splashScreen = new Image("images/SplashScreen.gif");
 		splashScreenView = new ImageView(this.splashScreen);
+//		this.stage.setResizable(false);
 
 		// CREATE BUTTONS
 		

@@ -14,16 +14,16 @@
             <Image url="@../images/bedroomLevel.png" />
          </image>
       </ImageView>
-      <Rectangle fx:id="Bed" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="249.0" layoutX="253.0" layoutY="91.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="222.0" />
+      <Rectangle fx:id="Bed" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="249.0" layoutX="261.0" layoutY="91.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="214.0" />
       <Rectangle fx:id="Cabinet1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="42.0" layoutX="80.0" layoutY="91.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="115.0" />
       <Rectangle fx:id="Box1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="38.0" layoutX="81.0" layoutY="203.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="43.0" />
       <Rectangle fx:id="Box2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="44.0" layoutX="188.0" layoutY="201.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
       <Rectangle fx:id="Cabinet2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="44.0" layoutX="520.0" layoutY="91.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="115.0" />
-      <Rectangle fx:id="Shelf2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="152.0" layoutX="87.0" layoutY="400.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="35.0" />
+      <Rectangle fx:id="Shelf2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="144.0" layoutX="87.0" layoutY="408.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="35.0" />
       <Rectangle fx:id="Shelf1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="115.0" layoutY="405.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="107.0" />
-      <Rectangle fx:id="Box5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="41.0" layoutX="535.0" layoutY="303.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="43.0" />
+      <Rectangle fx:id="Box5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="41.0" layoutX="543.0" layoutY="303.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="35.0" />
       <Rectangle fx:id="Box6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="42.0" layoutX="584.0" layoutY="202.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
-      <Rectangle fx:id="Box4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="42.0" layoutX="187.0" layoutY="553.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle fx:id="Box4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="42.0" layoutX="192.0" layoutY="553.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="33.0" />
       <Rectangle fx:id="chair1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="34.0" layoutX="291.0" layoutY="517.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="33.0" />
       <Rectangle fx:id="chair2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="31.0" layoutX="391.0" layoutY="515.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="36.0" />
       <Rectangle fx:id="Desk2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="49.0" layoutX="503.0" layoutY="453.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="115.0" />
@@ -71,12 +71,12 @@
             <Image url="@../images/Breakable.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="breakable10" fitHeight="35.0" fitWidth="33.0" layoutX="189.0" layoutY="713.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="breakable10" fitHeight="31.0" fitWidth="25.0" layoutX="197.0" layoutY="715.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Breakable.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="breakable14" fitHeight="39.0" fitWidth="40.0" layoutX="439.0" layoutY="659.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="breakable14" fitHeight="31.0" fitWidth="39.0" layoutX="445.0" layoutY="667.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Breakable.png" />
          </image>
@@ -111,7 +111,7 @@
             <Image url="@../images/Breakable.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="breakable2" fitHeight="38.0" fitWidth="39.0" layoutX="89.0" layoutY="560.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="breakable2" fitHeight="33.0" fitWidth="33.0" layoutX="89.0" layoutY="557.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Breakable.png" />
          </image>
@@ -126,7 +126,7 @@
             <Image url="@../images/Breakable.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="breakable23" fitHeight="36.0" fitWidth="41.0" layoutX="591.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="breakable23" fitHeight="36.0" fitWidth="41.0" layoutX="585.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Breakable.png" />
          </image>
@@ -151,7 +151,7 @@
             <Image url="@../images/Breakable.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="breakable9" fitHeight="34.0" fitWidth="33.0" layoutX="190.0" layoutY="607.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="breakable9" fitHeight="31.0" fitWidth="25.0" layoutX="198.0" layoutY="609.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Breakable.png" />
          </image>

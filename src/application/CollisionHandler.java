@@ -1,3 +1,9 @@
+/*
+ * CollisionHandler
+ * - Contains different methods for handling collisions between different entities
+ */
+
+
 package application;
 
 import java.util.ArrayList;
@@ -21,11 +27,7 @@ public class CollisionHandler {
             Bounds rectangleBounds = rectangle.getBoundsInParent();
 
             if (playerBounds.intersects(rectangleBounds)) {
-//            		System.out.println("There is a collision with " + rectangle.getId());		
-//            	System.out.println("PLAYER BOUNDS: " + playerBounds);
-//            	System.out.println("PLAYER BOUNDS + 1: " + playerBounds + 1);
-//            	System.out.println("You can't go there!");
-            	return true;
+            		return true;
             } 
         }
         return false;
@@ -34,11 +36,8 @@ public class CollisionHandler {
 	/*
 	 * checkCollisionBreakables
 	 * returns true if the player collides with a breakable
-	 * returns false if the player collides with a breakable that has already 
-	 * been destroyed
+	 * returns false if the player collides with a breakable that has already been destroyed
 	 * 
-	 * 
-	 * TODO: Can be used for bomb logic
 	 */
 	public boolean checkCollisionBreakables(ImageView player, ArrayList<ImageView> breakableObjects) {
 		Bounds playerBounds = player.getBoundsInParent();
@@ -47,31 +46,37 @@ public class CollisionHandler {
 			Bounds breakableBounds = breakable.getBoundsInParent();
 			if (playerBounds.intersects(breakableBounds)) {
 				if (breakable.getImage() == null) {
-//					System.out.println("Cleared already");
-					// Cleared already
 					return false;
 				} else {
-
-//					System.out.println("Picked up trash");
-//				breakable.setImage(null);
-				return true;
+					return true;
 				}
 			}
 		}
 		return false;
 	}
 
+	/*
+	 * enemyCollision()
+	 * - Iterates through an array of enemies
+	 * - Returns true if any of the enemies has collided with the player
+	 * - Returns false if not
+	 */
 	public boolean enemyCollision(Player player, ArrayList<Enemy> enemies) {
 		for(Enemy e: enemies) {
 			Bounds enemyBounds = e.getBounds();
 			if(player.getBounds().intersects(enemyBounds)) {
-//				System.out.println("Player colliding with enemy.");
 				return true;
 			}
 		}
 		return false;
 	}
 	
+	/*
+	 * bombBreakableCollision()
+	 * - Iterates through the breakable objects
+	 * - Returns true if the bomb has collided with a breakable object and sets the breakable as null
+	 * - Returns false if not
+	 */
 	public boolean bombBreakableCollision(ImageView bomb, ArrayList<ImageView> breakableObjects) {
 		Bounds bombBounds = bomb.getBoundsInParent();
 		
@@ -79,7 +84,6 @@ public class CollisionHandler {
 			Bounds breakableBounds = breakable.getBoundsInParent();
 			if (bombBounds.intersects(breakableBounds)) {
 				if (breakable.getImage() != null) {
-//					System.out.println("Collided with breakable");
 					breakable.setImage(null);
 					return true;
 				}

@@ -5,13 +5,13 @@ import javafx.scene.image.ImageView;
 
 public class Sprite {
 	private ImageView imageview;
-	private double x; 
-	private double y;
+//	private double x; 
+//	private double y;
 	
 	public Sprite(double x, double y, ImageView imageview) {
-		this.x = x;
-		this.y = y;
 		this.imageview = imageview;
+		this.getImageView().setLayoutX(x);
+		this.getImageView().setLayoutY(y);
 	}
 	
 	// getters

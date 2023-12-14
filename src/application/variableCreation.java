@@ -1,22 +1,19 @@
 /*
- * This is a class that handles repeated component creation
- * 
+ * variableCreation
+ * - handles repeated variable creation
  * 
  * 
  */
 
-
 package application;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class variableCreation{
-	// TODO: Create stage creator method
-	// BUTTON STYLES
+
+	// STYLES
 	public static final int BUTTON_HEIGHT = 60;
 	public static final int BUTTON_WIDTH = 240;
 	public static final String BUTTON_CORNER = " -fx-background-radius: 10;";
@@ -35,6 +32,10 @@ public class variableCreation{
         return button;
 	}
 	
+	/*
+	 * createText()
+	 * - creates a text field 
+	 */
 	public Text createText(String inputText) {
 		Text text = new Text();
 		text.setText(inputText);

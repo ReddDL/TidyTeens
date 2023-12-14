@@ -1,3 +1,11 @@
+/*
+ * LosingPage
+ * - Displays the losing page if loss conditions are met:
+ * 		- Player has been damaged three times
+ * 		- Time has ran out
+ */
+
+
 package application;
 
 import javafx.event.ActionEvent;
@@ -31,9 +39,6 @@ public class losingPage implements EventHandler<ActionEvent>{
 	
 	public losingPage(int scoreCounter){
 		this.scoreCounter = scoreCounter;
-//		this.mainMenu = mainMenu;
-		// STAGE INITIALIZATIONS
-		// TODO: Simplify this
 		this.root = new Group();
 		this.scene = new Scene(root,SCREEN_WIDTH,SCREEN_HEIGHT);
 		
@@ -41,7 +46,6 @@ public class losingPage implements EventHandler<ActionEvent>{
 		backgroundView = new ImageView(this.background);
 		
 		scoreText = variableCreation.createText(Integer.toString(scoreCounter));
-//		scoreText.setText(Integer.toString(scoreCounter));
         scoreText.setStyle("-fx-font-size: 120; -fx-fill: black;");
 
 		scoreText.setLayoutX(565);
@@ -69,9 +73,6 @@ public class losingPage implements EventHandler<ActionEvent>{
 	}
 	
 	public void setStage(Stage stage) {
-		
-		// STAGE INITIALIZATIONS
-		// TODO: Simplify this 
 		this.stage = stage;
 		this.stage.setTitle("Tidy Teens - Losing stage");
 		this.stage.setScene(scene);
@@ -83,7 +84,7 @@ public class losingPage implements EventHandler<ActionEvent>{
 	public void handle(ActionEvent event) {
 		if (event.getSource() == mainMenuButton) {
 			System.out.println("Main menu button clicked!");
-            mainMenu = new MainMenu();
+            mainMenu = new MainMenu(stage);
             mainMenu.setStage(stage);
 		}
 		
