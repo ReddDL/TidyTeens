@@ -113,7 +113,6 @@ public class PlayerController implements Initializable{
 	
 	@FXML ProgressBar timeBar;
 
-
 	CollisionHandler collisionHandler = new CollisionHandler();
 	
 	AnimationTimer gameLoop;
@@ -134,7 +133,9 @@ public class PlayerController implements Initializable{
 	            playerComponent.setCanBeDamaged(true);
 	        }));
 	        damageCooldown.setCycleCount(1);
-		
+	        
+	    timeBar.setStyle("-fx-accent: green;"); 		
+	    
 		// add the unbreakable objects
 		unbreakableObjects = new ArrayList<Rectangle>() {{
 			add(Bed); add(Cabinet1); add(Shelf1); add(Shelf2);
