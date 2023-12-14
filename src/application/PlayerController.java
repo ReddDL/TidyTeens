@@ -16,6 +16,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -107,10 +108,10 @@ public class PlayerController implements Initializable{
 	private ArrayList<ImageView> hearts;
 	private ArrayList<Rectangle> unbreakableObjects;	
 	private ArrayList<ImageView> breakableObjects;
-//	private ArrayList<ImageView> enemyImages;
 	private ArrayList<Enemy> initializedEnemies;
-//	private Random random;
-	///////////////////////////////////
+	
+	@FXML ProgressBar timeBar;
+
 
 	CollisionHandler collisionHandler = new CollisionHandler();
 	

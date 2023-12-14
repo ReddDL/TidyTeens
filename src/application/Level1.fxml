@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -196,5 +197,6 @@
             <Image url="@../images/heart.png" />
          </image>
       </ImageView>
+      <ProgressBar fx:id="timeBar" layoutX="755.0" layoutY="15.0" prefHeight="25.0" prefWidth="425.0" progress="0.0" />
    </children>
 </AnchorPane>
