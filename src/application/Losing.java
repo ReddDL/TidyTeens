@@ -48,7 +48,7 @@ public class Losing implements EventHandler<ActionEvent>{
 		scoreText = variableCreation.createText(Integer.toString(scoreCounter));
         scoreText.setStyle("-fx-font-size: 120; -fx-fill: black;");
 
-		scoreText.setLayoutX(565);
+		scoreText.setLayoutX(500);
 		scoreText.setLayoutY(475);
 		
 		mainMenuButton = variableCreation.createButton("MAIN MENU");

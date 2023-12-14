@@ -16,6 +16,7 @@ public class Bomb extends Sprite{
 
 	AnchorPane scene;
     private Timeline removalTimeline;
+
     private static final double BOMB_DURATION = 1.5;
 
     // Bomb Constructor
@@ -33,11 +34,11 @@ public class Bomb extends Sprite{
      */
     private void initializeRemovalTimeline() {
         removalTimeline = new Timeline(new KeyFrame(
-                Duration.seconds(BOMB_DURATION), // Adjust this duration as needed
+                Duration.seconds(BOMB_DURATION),
                 event -> removeBombFromScene()
         ));
     }
-    
+    	
     /*
      * setBombVisible()
      * - if the bomb is set as visible, starts the removal timeline
@@ -47,6 +48,7 @@ public class Bomb extends Sprite{
     public void setBombVisible(boolean value) {
 
         if (value) {
+
             removalTimeline.playFromStart();
         } else {
             removalTimeline.stop();

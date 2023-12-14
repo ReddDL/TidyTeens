@@ -15,14 +15,11 @@ package application;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-import javafx.scene.Group;
-
-
 public class Main extends Application{
 	@Override
 	public void start(Stage stage) {
 		try {
-			Group root = new Group();
+//			Group root = new Group();
 			MainMenu mainMenu = new MainMenu(stage);
 			mainMenu.setStage(stage);
 			stage.show();

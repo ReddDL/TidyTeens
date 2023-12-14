@@ -62,7 +62,7 @@
             <Image url="@../images/Breakable.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="breakable6" fitHeight="38.0" fitWidth="37.0" layoutX="143.0" layoutY="351.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="breakable6" fitHeight="38.0" fitWidth="37.0" layoutX="143.0" layoutY="362.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Breakable.png" />
          </image>
@@ -147,7 +147,7 @@
             <Image url="@../images/Breakable.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="breakable13" fitHeight="35.0" fitWidth="40.0" layoutX="391.0" layoutY="565.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="breakable13" fitHeight="35.0" fitWidth="40.0" layoutX="391.0" layoutY="555.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Breakable.png" />
          </image>
@@ -198,5 +198,10 @@
          </image>
       </ImageView>
       <ProgressBar fx:id="timeBar" layoutX="755.0" layoutY="15.0" prefHeight="25.0" prefWidth="425.0" progress="0.0" />
+      <ImageView fx:id="splashReadyView" fitHeight="68.0" fitWidth="425.0" layoutX="757.0" layoutY="663.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/splashReady.gif" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

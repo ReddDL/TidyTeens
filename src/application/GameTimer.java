@@ -47,6 +47,10 @@ public class GameTimer implements Initializable{
 	private Image waterSplash = new Image("images/waterSplash.gif", 100,100, true, true);
 	private ImageView waterSplashView = new ImageView(waterSplash);
 	
+//	private Image splashReady = new Image("images/splashReady.gif");
+//	private ImageView splashReadyView = new ImageView(splashReady);
+	@FXML private ImageView splashReadyView;
+	
 	// The text
 	@FXML private Text score;
 	
@@ -105,7 +109,6 @@ public class GameTimer implements Initializable{
 	@FXML private ImageView enemy2;
 	@FXML private ImageView enemy3;
 	
-	private ArrayList<ImageView> hearts;
 	private ArrayList<Rectangle> unbreakableObjects;	
 	private ArrayList<ImageView> breakableObjects;
 	private ArrayList<Enemy> initializedEnemies;
@@ -133,7 +136,8 @@ public class GameTimer implements Initializable{
 	        }));
 	        damageCooldown.setCycleCount(1);
 	        
-	    timeBar.setStyle("-fx-accent: green;"); 		
+	    timeBar.setStyle("-fx-accent: green;"); 	
+	    
 	    
 		// add the unbreakable objects
 		unbreakableObjects = new ArrayList<Rectangle>() {{
@@ -156,15 +160,6 @@ public class GameTimer implements Initializable{
 			add(breakable19); add(breakable20); add(breakable21);
 			add(breakable22); add(breakable23); add(breakable24);
 		}};
-		// heart images
-//		hearts = new ArrayList<ImageView>() {{
-//			add(heart1); add(heart2); add(heart3);
-//		}};
-
-		
-//		enemyImages = new ArrayList<ImageView>() {{
-//			add(enemy1); add(enemy2); add(enemy3);
-//		}};
 		
 		Enemy enemy1Component = new Enemy(enemy1, x, y);
 		Enemy enemy2Component = new Enemy(enemy2, x, y);
@@ -174,8 +169,6 @@ public class GameTimer implements Initializable{
 			add(enemy1Component); add(enemy2Component); add(enemy3Component);
 		}};
 
-//		Random random = new Random();
-		///////////////////////////////////
 		gameLoop = new AnimationTimer() {
 			long startTime = System.currentTimeMillis();
 			long lastPrintTime = startTime;
@@ -187,7 +180,7 @@ public class GameTimer implements Initializable{
 				long elapsedMilliseconds = TOTAL_DURATION - (System.currentTimeMillis() - startTime);
 				double elapsedSeconds = (double) elapsedMilliseconds / 1000;
 		        if (System.currentTimeMillis() - lastPrintTime >= 30 * 1000) {
-		            System.out.println("Remaining time: " + elapsedSeconds);
+		            System.out.println("Remaining time: " + (int) elapsedSeconds);
 		            lastPrintTime = System.currentTimeMillis();
 		        }
 		        
@@ -214,16 +207,19 @@ public class GameTimer implements Initializable{
 				
 				// moves player and enemmies
 				playerComponent.makeMovable(player, scene);
-//				enemy1Component.moveEnemy(playerComponent, unbreakableObjects, breakableObjects);
-//				enemy2Component.moveEnemy(playerComponent, unbreakableObjects, breakableObjects);
-//				enemy3Component.moveEnemy(playerComponent, unbreakableObjects, breakableObjects);
+				enemy1Component.moveEnemy(playerComponent, unbreakableObjects, breakableObjects);
+				enemy2Component.moveEnemy(playerComponent, unbreakableObjects, breakableObjects);
+				enemy3Component.moveEnemy(playerComponent, unbreakableObjects, breakableObjects);
 				
-				// checks if the player can drop a bomb and runs an additional checker
+				// if the player cant drop a bomb, it means that the player has recently dropped a bomb, checks if it collides with any breakable objects
 				if(!playerComponent.getCanDropBomb()) {
+					splashReadyView.setVisible(false);
 					if(collisionHandler.bombBreakableCollision(playerComponent.bombImage, breakableObjects)) {
 						pointChecker(TOTAL_DURATION, elapsedSeconds);
 						breakableNum--;
 					}
+				} else {
+					splashReadyView.setVisible(true);
 				}
 				
 				// if enemies hit player
