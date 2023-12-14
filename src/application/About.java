@@ -25,7 +25,7 @@ public class About implements EventHandler<ActionEvent>{
 	
 	private MainMenu mainMenu;
 	
-	variableCreation variableCreation = new variableCreation();
+	VariableCreation variableCreation = new VariableCreation();
 	
 	public About(MainMenu mainMenu) {
 		

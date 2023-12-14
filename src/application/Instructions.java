@@ -33,7 +33,7 @@ public class Instructions extends Application implements EventHandler<ActionEven
 	
 	private MainMenu mainMenu;
 	
-	variableCreation variableCreation = new variableCreation();
+	VariableCreation variableCreation = new VariableCreation();
 	
 	public Instructions(MainMenu mainMenu) {
 		this.mainMenu = mainMenu;

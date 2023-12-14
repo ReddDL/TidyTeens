@@ -11,7 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-public class variableCreation{
+public class VariableCreation{
 
 	// STYLES
 	public static final int BUTTON_HEIGHT = 60;

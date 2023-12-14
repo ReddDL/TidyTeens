@@ -26,7 +26,7 @@ public class PlayGame{
 	private Stage stage;
 	@FXML private AnchorPane scene;
 	
-	private PlayerController PlayerController;
+	private GameTimer PlayerController;
 
 	public void setStage(Stage stage){
 		

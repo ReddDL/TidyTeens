@@ -42,7 +42,7 @@ public class MainMenu implements EventHandler<ActionEvent>{
 	Button aboutButton;
 	Button instructionsButton;
 	
-	variableCreation variableCreation = new variableCreation();
+	VariableCreation variableCreation = new VariableCreation();
 	
 	public MainMenu(Stage stage) {
 		this.root = new Group();

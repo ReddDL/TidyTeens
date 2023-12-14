@@ -18,7 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class losingPage implements EventHandler<ActionEvent>{
+public class Losing implements EventHandler<ActionEvent>{
 	public static final int SCREEN_HEIGHT = 800;
 	public static final int SCREEN_WIDTH = 1200;
 	
@@ -35,9 +35,9 @@ public class losingPage implements EventHandler<ActionEvent>{
 	private MainMenu mainMenu;
 	private PlayGame playGame;
 	
-	variableCreation variableCreation = new variableCreation();
+	VariableCreation variableCreation = new VariableCreation();
 	
-	public losingPage(int scoreCounter){
+	public Losing(int scoreCounter){
 		this.scoreCounter = scoreCounter;
 		this.root = new Group();
 		this.scene = new Scene(root,SCREEN_WIDTH,SCREEN_HEIGHT);

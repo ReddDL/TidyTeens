@@ -52,11 +52,11 @@ public class Player extends Sprite{
 	
 	
 	CollisionHandler collisionHandler = new CollisionHandler();
-	PlayerController playerController;
+	GameTimer playerController;
 	public ImageView bombImage;
 
     // Player constructor
-    public Player(ImageView player, double x, double y, int lives, int scoreCounter, ImageView bombImage, PlayerController playerController) {
+    public Player(ImageView player, double x, double y, int lives, int scoreCounter, ImageView bombImage, GameTimer playerController) {
         super(x,y,player);
         this.lives = lives;
         this.scoreCounter = scoreCounter;
