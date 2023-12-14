@@ -3,17 +3,20 @@ package application;
 import java.util.ArrayList;
 
 import javafx.animation.AnimationTimer;
+import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
 public class Player extends Sprite{
 	@FXML private ImageView player;
@@ -26,7 +29,15 @@ public class Player extends Sprite{
 	private boolean canBeDamaged = true;
 	private boolean canSpawnBomb = true;
 	
-	private ImageView playerUp = ("images/")
+	// different images
+	private Image playerUp = new Image("images/PlayerUp.png");
+	private ImageView playerUpView = new ImageView(playerUp);
+	private Image playerLeft = new Image("images/PlayerLeft.png");
+	private ImageView playerLeftView = new ImageView(playerLeft);
+	private Image playerRight = new Image("images/PlayerRight.png");
+	private ImageView playerRightView = new ImageView(playerRight);
+	private Image playerDown = new Image("images/StandingPlayer.png");
+	private ImageView playerDownView = new ImageView(playerDown);
 	
 	
 	private BooleanProperty upPressed = new SimpleBooleanProperty();
@@ -37,38 +48,57 @@ public class Player extends Sprite{
 	
 	private BooleanBinding keyPressed = upPressed.or(leftPressed).or(rightPressed).or(downPressed).or(spacePressed);
 		
-	private double movementVariable = 2;
+	private static final double movementVariable = 2;
 	
 	CollisionHandler collisionHandler = new CollisionHandler();
 	PlayerController playerController;
+	public ImageView bombImage;
+    private Timeline bombCooldownTimeline;
 
-    public Player(ImageView player, double x, double y, int lives, int scoreCounter, PlayerController playerController) {
+
+    public Player(ImageView player, double x, double y, int lives, int scoreCounter, ImageView bombImage, PlayerController playerController) {
         super(x,y,player);
         this.lives = lives;
         this.scoreCounter = scoreCounter;
         this.playerController = playerController;
+        this.bombImage = bombImage;
+        initializeBombCooldownTimeline();
+
     }
     
-//    public void spawnBomb(ImageView player, AnchorPane scene) {
-//		this.player = player;
-//		this.scene = scene;
-//    		scene.setOnKeyPressed(e -> {
-//			if(e.getCode() == KeyCode.SPACE) {
-//				System.out.println("Dropped a bomb");
-//				Bomb bomb = new Bomb(this.getX(), this.getY());
-//				bomb.createAnimationTimeline();
-//				bomb.setBombVisible(true);
-//				scene.getChildren().add(bomb.getImageView());
-//			}
-//		
-//		});
-//    		scene.setOnKeyReleased(e ->{
-//    			if(e.getCode() == KeyCode.SPACE) {
-//    				System.out.println("CANT SPAWN BOMB YET");
-//    			}
-//    		});
-//    }
+    public void dropBomb() {
+        if (canSpawnBomb) {
+            Bomb bomb = new Bomb(bombImage, this.getImageView().getLayoutX(), this.getImageView().getLayoutY(), scene);
+            this.setCanDropBomb(false);
+
+            bomb.getImageView().setLayoutX(this.getImageView().getLayoutX() - 20);
+            bomb.getImageView().setLayoutY(this.getImageView().getLayoutY() - 5);
+            bomb.setBombVisible(true);
+            scene.getChildren().add(bomb.getImageView());
+
+            // Start the cooldown timeline
+            bombCooldownTimeline.playFromStart();
+
+            // Set the flag to indicate bomb cooldown
+            this.canSpawnBomb = false;
+        } else {
+            System.out.println("Bomb cooldown in progress, cannot drop bomb.");
+        }
+    }
     
+    private void initializeBombCooldownTimeline() {
+//        Duration cooldownDuration = Duration.seconds(3);
+
+        bombCooldownTimeline = new Timeline(new KeyFrame(
+                Duration.seconds(3),
+                event -> {
+                    // Cooldown is over, allow bomb dropping again
+                	System.out.println("You can drop a bomb again");
+                    this.setCanDropBomb(true);
+                }
+        ));
+    }
+
     /* move
      * moves the player in the direction of the 
      * keypress    
@@ -90,7 +120,7 @@ public class Player extends Sprite{
 	}
 	
 	AnimationTimer timer = new AnimationTimer() {
-		private Bomb bomb = null;  // Declare a Bomb variable
+//		private Bomb bomb = null;  // Declare a Bomb variable
 
 		
 		@Override
@@ -111,16 +141,16 @@ public class Player extends Sprite{
 				player.setLayoutX(player.getLayoutX() + movementVariable);
 		    }
 			
-			if(spacePressed.get()) {
-				if (bomb == null || !bomb.getBombVisible()) {
-	                // Create a new bomb only if it's not already visible
-	                System.out.println("Dropped a bomb");
-	                bomb = new Bomb(player.getLayoutX(), player.getLayoutY());
-	                bomb.createAnimationTimeline();
-	                bomb.setBombVisible(true);
-	                scene.getChildren().add(bomb.getImageView());
-	            }
-			}
+//			if(spacePressed.get()) {
+//				if (bomb == null || !bomb.getBombVisible()) {
+//	                // Create a new bomb only if it's not already visible
+//	                System.out.println("Dropped a bomb");
+//	                bomb = new Bomb(player.getLayoutX(), player.getLayoutY());
+//	                bomb.createAnimationTimeline();
+//	                bomb.setBombVisible(true);
+//	                scene.getChildren().add(bomb.getImageView());
+//	            }
+//			}
 			playerController.checkCollision(currentX, currentY);
 			
 		}
@@ -130,35 +160,46 @@ public class Player extends Sprite{
 		scene.setOnKeyPressed(e -> {
 			if(e.getCode() == KeyCode.W) {
 				upPressed.set(true);
+				this.getImageView().setImage(playerUp);
 			}
 			if(e.getCode() == KeyCode.A) {
 				leftPressed.set(true);
+				this.getImageView().setImage(playerLeft);
+
 			}
 			if(e.getCode() == KeyCode.S) {
 				downPressed.set(true);
+				this.getImageView().setImage(playerDown);
+
 			}
 			if(e.getCode() == KeyCode.D) {
 				rightPressed.set(true);
+				this.getImageView().setImage(playerRight);
 			}
-			if(e.getCode() == KeyCode.SPACE) {
-				spacePressed.set(true);
-			}
+			if (e.getCode() == KeyCode.SPACE && canSpawnBomb) {
+				System.out.println("Dropped bomb");
+				this.dropBomb();
+	            }
 		});
 		scene.setOnKeyReleased(e ->{
 			if(e.getCode() == KeyCode.W) {
 				upPressed.set(false);
+				this.getImageView().setImage(playerUp);
+
 			}
 			if(e.getCode() == KeyCode.A) {
 				leftPressed.set(false);
+				this.getImageView().setImage(playerLeft);
+
 			}
 			if(e.getCode() == KeyCode.S) {
 				downPressed.set(false);
+				this.getImageView().setImage(playerDown);
+
 			}
 			if(e.getCode() == KeyCode.D) {
 				rightPressed.set(false);
-			}
-			if(e.getCode() == KeyCode.SPACE) {
-				spacePressed.set(false);
+				this.getImageView().setImage(playerRight);
 			}
 		});
 	}
@@ -193,6 +234,14 @@ public class Player extends Sprite{
     
     public void setCanBeDamaged(boolean value) {
     		this.canBeDamaged = value;
+    }
+    
+    public boolean getCanDropBomb() {
+    		return this.canSpawnBomb;
+    }
+    
+    public void setCanDropBomb(boolean value) {
+    		this.canSpawnBomb = value;
     }
     
 

@@ -52,8 +52,8 @@ public class CollisionHandler {
 					return false;
 				} else {
 
-					System.out.println("Picked up trash");
-				breakable.setImage(null);
+//					System.out.println("Picked up trash");
+//				breakable.setImage(null);
 				return true;
 				}
 			}
@@ -67,6 +67,22 @@ public class CollisionHandler {
 			if(player.getBounds().intersects(enemyBounds)) {
 //				System.out.println("Player colliding with enemy.");
 				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean bombBreakableCollision(ImageView bomb, ArrayList<ImageView> breakableObjects) {
+		Bounds bombBounds = bomb.getBoundsInParent();
+		
+		for (ImageView breakable : breakableObjects) {
+			Bounds breakableBounds = breakable.getBoundsInParent();
+			if (bombBounds.intersects(breakableBounds)) {
+				if (breakable.getImage() != null) {
+//					System.out.println("Collided with breakable");
+					breakable.setImage(null);
+					return true;
+				}
 			}
 		}
 		return false;

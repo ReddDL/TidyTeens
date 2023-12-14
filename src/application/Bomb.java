@@ -8,13 +8,14 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class Bomb {
+public class Bomb extends Sprite{
 
-    private ImageView bombImageView;
+//    private ImageView bombImageView;
     private Timeline animationTimeline;
     private Image[] bombFrames;
     private int currentFrameIndex;
@@ -23,66 +24,41 @@ public class Bomb {
     private double y;
     
     private boolean bombVisible = false;
-    
-    public Bomb(double x, double y) {
-    		this.x = x;
-    		this.y = y;
-    		this.bombImageView = new ImageView();
-    		this.bombImageView.setLayoutX(x);
-    		this.bombImageView.setLayoutY(y);
-    }
-    /*
-     * Animates sprite
-     * 
-     * 
-     * 
-     */
-    
-    
-    public void createAnimationTimeline() {
-        int numFrames = 12; // Assuming you have 12 frames (000.png to 011.png)
-        bombFrames = new Image[numFrames];
+    private Timeline removalTimeline;
+    AnchorPane scene;
 
-        for (int i = 0; i < numFrames; i++) {
-            String frameNumber = String.format("%03d", i); // Formats the number with leading zeros
-            String fileName = "/images/" + frameNumber + ".png";
-            bombFrames[i] = new Image(fileName);
-        }
+    
+    public Bomb(ImageView bombView, double x, double y, AnchorPane scene) {
+    		super(x,y,bombView);
+    		this.scene = scene;
+    		initializeRemovalTimeline();
 
-        animationTimeline = new Timeline(
-                new KeyFrame(Duration.millis(100), event -> updateSpriteFrame())
-        );
-        animationTimeline.setCycleCount(Animation.INDEFINITE);
-        animationTimeline.play(); // Start the animation
     }
     
-    /*
-     * 
-     * 
-     * 
-     */
-
-    public void updateSpriteFrame() {
-        // Switch to the next frame
-        if (bombVisible) {
-            currentFrameIndex = (currentFrameIndex + 1) % bombFrames.length;
-            bombImageView.setImage(bombFrames[currentFrameIndex]);
-        }
+    private void initializeRemovalTimeline() {
+        removalTimeline = new Timeline(new KeyFrame(
+                Duration.seconds(1.5), // Adjust this duration as needed
+                event -> removeBombFromScene()
+        ));
     }
     
     public void setBombVisible(boolean value) {
-    		this.bombVisible = value;
-    		
-    		if (!value) {
-    			animationTimeline.stop();
-    		}
+        this.bombVisible = value;
+
+        if (value) {
+            removalTimeline.playFromStart();
+        } else {
+            removalTimeline.stop();
+        }
     }
     
     public boolean getBombVisible() {
     		return this.bombVisible;
     }
     
-    public ImageView getImageView() {
-    		return this.bombImageView;
+    private void removeBombFromScene() {
+//        getImageView().setVisible(false);
+        // Remove the bomb's ImageView from the scene
+        scene.getChildren().remove(getImageView());
     }
 }

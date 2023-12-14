@@ -15,25 +15,25 @@ public class Sprite {
 	}
 	
 	// getters
-	public double getX() {
-		return this.x;
-	}
-	
-	public double getY() {
-		return this.y;
-	}
-	
 	public ImageView getImageView() {
 		return this.imageview;
 	}
+	public double getX() {
+		return this.getImageView().getLayoutX();
+	}
+	
+	public double getY() {
+		return this.getImageView().getLayoutY();
+	}
+	
 	
 	// setters
 	public void setX(double x) {
-		this.x = x;
+		this.getImageView().setLayoutX(x);
 	}
 	
 	public void setY(double y) {
-		this.y = y;
+		this.getImageView().setLayoutY(y);
 	}
 
 	public Bounds getBounds() {

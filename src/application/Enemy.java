@@ -29,12 +29,12 @@ public class Enemy extends Sprite {
 
     // TO ADD:
     // rotate enemy model depending on xmod and y mod
-    public void moveEnemy(Player player, ArrayList<Rectangle> unbreakables) {
+    public void moveEnemy(Player player, ArrayList<Rectangle> unbreakables, ArrayList<ImageView> breakables) {
         ImageView enemyImage = getImageView();
         double xcoord = enemyImage.getLayoutX();
         double ycoord = enemyImage.getLayoutY();
-        int xmod = (player.getImageView().getLayoutX() > xcoord ? 1: -1);
-        int ymod = (player.getImageView().getLayoutY() > ycoord ? 1: -1);
+        double xmod = (player.getImageView().getLayoutX() > xcoord ? 1: -1);
+        double ymod = (player.getImageView().getLayoutY() > ycoord ? 1: -1);
         int mod2 = (random.nextInt(1) == 1 ? 1: -1);
 //        System.out.println("x: " + this.getImageView().getLayoutX() + " y: " + this.getImageView().getLayoutY());
 //        System.out.println("xmod: " + xmod + " ymod: " + ymod);

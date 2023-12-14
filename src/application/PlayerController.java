@@ -37,6 +37,9 @@ public class PlayerController implements Initializable{
 	@FXML private ImageView heart2;
 	@FXML private ImageView heart3;
 	
+	private Image waterSplash = new Image("images/waterSplash.gif", 100,100, true, true);
+	private ImageView waterSplashView = new ImageView(waterSplash);
+	
 	@FXML private Text score;
 	
 	@FXML private Rectangle Bed;
@@ -116,7 +119,8 @@ public class PlayerController implements Initializable{
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		playerComponent = new Player(player, x, y, 3, scoreCounter, this);
+//		Bomb bomb = new Bomb(bombImageView, x, y);
+		playerComponent = new Player(player, x, y, 3, scoreCounter, waterSplashView, this);
 		
 		 damageCooldown = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
 	            playerComponent.setCanBeDamaged(true);
@@ -184,7 +188,7 @@ public class PlayerController implements Initializable{
 //				System.out.println("ELAPSED TIME: " + elapsedSeconds);
 				
 				// losing conditions
-				if (elapsedSeconds >= 15 || playerComponent.getLives() == 0) {
+				if (elapsedSeconds >= 300|| playerComponent.getLives() == 0) {
 					System.out.println("GAME OVER");
 					didWin = false;
 					gameOver(didWin);
@@ -192,13 +196,26 @@ public class PlayerController implements Initializable{
 //					
 				}
 				
+				
 				playerComponent.makeMovable(player, scene, unbreakableObjects);
 //				playerComponent.spawnBomb(player, scene);
 //				Enemy.makeEnemiesMove(initializedEnemies, unbreakableObjects);
-//				enemy1Component.moveEnemy(playerComponent, unbreakableObjects);
-//				enemy2Component.moveEnemy(playerComponent, unbreakableObjects);
-//				enemy3Component.moveEnemy(playerComponent, unbreakableObjects);
-
+				enemy1Component.moveEnemy(playerComponent, unbreakableObjects, breakableObjects);
+				enemy2Component.moveEnemy(playerComponent, unbreakableObjects, breakableObjects);
+				enemy3Component.moveEnemy(playerComponent, unbreakableObjects, breakableObjects);
+				
+//				if (playerComponent.getCanDropBomb()) {
+//					Bomb bomb = new Bomb(waterSplashView, playerComponent.getX(), playerComponent.getY());
+//					playerComponent.dropBomb();
+//				}
+				
+				if(!playerComponent.getCanDropBomb()) {
+//					System.out.println("Player just dropped a bomb");
+					if(collisionHandler.bombBreakableCollision(playerComponent.bombImage, breakableObjects)) {
+						pointChecker();
+					}
+				}
+				
 				// if enemies hit player
 				if (collisionHandler.enemyCollision(playerComponent, initializedEnemies) && playerComponent.getCanBeDamaged()) {
 					System.out.println("PLAYER DAMAGED");
@@ -237,7 +254,7 @@ public class PlayerController implements Initializable{
 		if (collisionHandler.checkCollisionBreakables(player, breakableObjects) ) {
 			player.setLayoutX(currentX);
 			player.setLayoutY(currentY);
-			pointChecker();
+//			pointChecker();
 		}
 		
 //		collisionHandler.enemyCollixsion(player, initializedEnemies);
@@ -251,7 +268,8 @@ public class PlayerController implements Initializable{
 	 */
 	
 	private void pointChecker() {
-		playerComponent.incrementScore();		score.setText(String.valueOf(playerComponent.getScore()));
+		playerComponent.incrementScore();		
+		score.setText(String.valueOf(playerComponent.getScore()));
 		System.out.println("PLAYER SCORE: " + playerComponent.getScore());
 		
 	}
