@@ -74,7 +74,7 @@ public class Losing implements EventHandler<ActionEvent>{
 	
 	public void setStage(Stage stage) {
 		this.stage = stage;
-		this.stage.setTitle("Tidy Teens - Losing stage");
+		this.stage.setTitle("Tidy Teens");
 		this.stage.setScene(scene);
 		this.stage.show();
 		

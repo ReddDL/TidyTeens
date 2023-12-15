@@ -35,7 +35,7 @@ public class About implements EventHandler<ActionEvent>{
 		this.root = new Group();
 		this.scene = new Scene(root,SCREEN_WIDTH,SCREEN_HEIGHT);
 		
-		this.background = new Image("images/SplashScreen-blurred.png");
+		this.background = new Image("images/About.png");
 		this.backgroundView = new ImageView(this.background);
 		
 		this.previousButton = variableCreation.createButton("Back");

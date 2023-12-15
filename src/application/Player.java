@@ -18,6 +18,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 public class Player extends Sprite{
@@ -54,6 +56,8 @@ public class Player extends Sprite{
 	CollisionHandler collisionHandler = new CollisionHandler();
 	GameTimer playerController;
 	public ImageView bombImage;
+	
+	private MediaPlayer damageSound;
 
     // Player constructor
     public Player(ImageView player, double x, double y, int lives, int scoreCounter, ImageView bombImage, GameTimer playerController) {
@@ -62,6 +66,7 @@ public class Player extends Sprite{
         this.scoreCounter = scoreCounter;
         this.playerController = playerController;
         this.bombImage = bombImage;
+        initializeDamageSound();
         initializeBombCooldownTimeline();
 
     }
@@ -108,6 +113,11 @@ public class Player extends Sprite{
                     this.setCanDropBomb(true);
                 }
         ));
+    }
+    
+    private void initializeDamageSound() {
+	    Media startSoundMedia = new Media(getClass().getResource("damageSound.mp3").toString());
+        damageSound = new MediaPlayer(startSoundMedia);
     }
 
     /* makeMovable()
@@ -215,6 +225,9 @@ public class Player extends Sprite{
 	
 	// If the player is damaged, decrement the lives
 	public void damagePlayer() {
+        if (!damageSound.getStatus().equals(MediaPlayer.Status.PLAYING)) {
+            damageSound.play();
+        }
 		this.lives--;
 		System.out.println("PLAYER LIVES: " + this.lives);
 	}

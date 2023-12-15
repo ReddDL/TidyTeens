@@ -5,14 +5,19 @@
  */
 
 package application;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
-import javafx.scene.Group; // Import Group
+import javafx.util.Duration;
 
 public class MainMenu implements EventHandler<ActionEvent>{
 	
@@ -42,6 +47,10 @@ public class MainMenu implements EventHandler<ActionEvent>{
 	Button aboutButton;
 	Button instructionsButton;
 	
+	private MediaPlayer titleSound;
+    private Timeline titleSoundLoop;
+
+	
 	VariableCreation variableCreation = new VariableCreation();
 	
 	public MainMenu(Stage stage) {
@@ -49,11 +58,28 @@ public class MainMenu implements EventHandler<ActionEvent>{
 		this.scene = new Scene(root,SCREEN_WIDTH,SCREEN_HEIGHT);
 		this.stage = stage;
 		this.stage.setResizable(false);
+		this.stage.setTitle("Tidy Teens - Main Menu");
 		
+		// Plays the title sound
+	    Media startSoundMedia = new Media(getClass().getResource("titleSound.mp3").toString());
+        titleSound = new MediaPlayer(startSoundMedia);
+        if (!titleSound.getStatus().equals(MediaPlayer.Status.PLAYING)) {
+            titleSound.play();
+        }
+        
+        // Loops the title sound indefinitely
+        titleSoundLoop = new Timeline(new KeyFrame(Duration.seconds(164), event -> {
+            if (titleSound.getStatus() != MediaPlayer.Status.PLAYING) {
+                titleSound.play();
+            }
+        }));
+        titleSoundLoop.setCycleCount(Timeline.INDEFINITE);
+        titleSoundLoop.play();
+
+
 		// Add the splashscreen image
 		this.splashScreen = new Image("images/SplashScreen.gif");
 		splashScreenView = new ImageView(this.splashScreen);
-//		this.stage.setResizable(false);
 
 		// CREATE BUTTONS
 		
@@ -103,12 +129,14 @@ public class MainMenu implements EventHandler<ActionEvent>{
 	Scene getScene() {
 		return this.scene;
 	}
-
+	
 	@Override
 	public void handle(ActionEvent event) {
 		// When the play game button is clicked
 		if (event.getSource() == playGameButton) {
             System.out.println("Play Game button clicked!");
+            titleSound.stop();
+            titleSoundLoop.stop();
             playGameStage = new PlayGame();
             playGameStage.setStage(stage);
 		}

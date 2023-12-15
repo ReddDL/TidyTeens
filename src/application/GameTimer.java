@@ -20,6 +20,9 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -47,11 +50,10 @@ public class GameTimer implements Initializable{
 	private Image waterSplash = new Image("images/waterSplash.gif", 100,100, true, true);
 	private ImageView waterSplashView = new ImageView(waterSplash);
 	
-//	private Image splashReady = new Image("images/splashReady.gif");
-//	private ImageView splashReadyView = new ImageView(splashReady);
+	// Splash indicator
 	@FXML private ImageView splashReadyView;
 	
-	// The text
+	// Score text
 	@FXML private Text score;
 	
 	// Unbreakable images
@@ -126,7 +128,9 @@ public class GameTimer implements Initializable{
     private int breakableNum = 24;
 
     private static final long TOTAL_DURATION = 180 * 1000;
-	
+    
+    private MediaPlayer backgroundMusic;
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		playerComponent = new Player(player, x, y, 3, scoreCounter, waterSplashView, this);
@@ -138,6 +142,10 @@ public class GameTimer implements Initializable{
 	        
 	    timeBar.setStyle("-fx-accent: green;"); 	
 	    
+	    // initializes the background music
+	    Media startSoundMedia = new Media(getClass().getResource("gameBackground.mp3").toString());
+        backgroundMusic = new MediaPlayer(startSoundMedia);
+
 	    
 		// add the unbreakable objects
 		unbreakableObjects = new ArrayList<Rectangle>() {{
@@ -175,6 +183,10 @@ public class GameTimer implements Initializable{
 			
 			@Override
 			public void handle(long arg0) {
+				// plays the background music if its not playing
+                if (!backgroundMusic.getStatus().equals(MediaPlayer.Status.PLAYING)) {
+                    backgroundMusic.play();
+                }
 				
 				// lazy timer
 				long elapsedMilliseconds = TOTAL_DURATION - (System.currentTimeMillis() - startTime);
@@ -190,6 +202,8 @@ public class GameTimer implements Initializable{
 
 				// losing conditions
 				if (elapsedSeconds <= 0|| playerComponent.getLives() == 0) {
+                    backgroundMusic.stop();
+
 					System.out.println("GAME OVER");
 					didWin = false;
 					gameOver(didWin);

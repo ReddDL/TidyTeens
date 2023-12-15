@@ -19,7 +19,6 @@ public class Main extends Application{
 	@Override
 	public void start(Stage stage) {
 		try {
-//			Group root = new Group();
 			MainMenu mainMenu = new MainMenu(stage);
 			mainMenu.setStage(stage);
 			stage.show();

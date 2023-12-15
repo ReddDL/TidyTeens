@@ -10,6 +10,8 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 public class Bomb extends Sprite{
@@ -18,13 +20,21 @@ public class Bomb extends Sprite{
     private Timeline removalTimeline;
 
     private static final double BOMB_DURATION = 1.5;
+    private MediaPlayer splashSound;
+
 
     // Bomb Constructor
     public Bomb(ImageView bombView, double x, double y, AnchorPane scene) {
     		super(x,y,bombView);
     		this.scene = scene;
+    		initializeBombSound();
     		initializeRemovalTimeline();
 
+    }
+    
+    private void initializeBombSound() {
+	    Media startSoundMedia = new Media(getClass().getResource("splashSound.mp3").toString());
+        splashSound = new MediaPlayer(startSoundMedia);
     }
     
     /*
@@ -41,16 +51,19 @@ public class Bomb extends Sprite{
     	
     /*
      * setBombVisible()
-     * - if the bomb is set as visible, starts the removal timeline
+     * - if the bomb is set as visible, starts the removal timeline, plays the splash sound
      * - else, stops the timeline
      * 
      */
     public void setBombVisible(boolean value) {
 
         if (value) {
-
+            if (!splashSound.getStatus().equals(MediaPlayer.Status.PLAYING)) {
+                splashSound.play();
+            }
             removalTimeline.playFromStart();
         } else {
+        		splashSound.stop();
             removalTimeline.stop();
         }
     }

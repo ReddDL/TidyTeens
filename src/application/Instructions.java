@@ -42,7 +42,7 @@ public class Instructions extends Application implements EventHandler<ActionEven
 		this.root = new Group();
 		this.scene = new Scene(root,SCREEN_WIDTH,SCREEN_HEIGHT);
 		
-		this.background = new Image("images/SplashScreen-blurred.png");
+		this.background = new Image("images/Instructions.png");
 		backgroundView = new ImageView(this.background);
 		
 		previousButton = variableCreation.createButton("Back");
@@ -58,12 +58,8 @@ public class Instructions extends Application implements EventHandler<ActionEven
 	}
 	
 	public void setStage(Stage stage) {
-		
-		
-		// STAGE INITIALIZATIONS
-		// TODO: Simplify this 
 		this.stage = stage;
-		this.stage.setTitle("Tidy Teens - Instructions");
+		this.stage.setTitle("Tidy Teens");
 		this.stage.setScene(scene);
 		this.stage.show();
 		
@@ -71,8 +67,7 @@ public class Instructions extends Application implements EventHandler<ActionEven
 	
 	@Override
 	public void handle(ActionEvent event) {
-		// TODO Auto-generated method stub
-		// TODO: Make this cleaner so no need to instantiate again
+
 		if (event.getSource() == previousButton) {
 			System.out.println("Previous button clicked!");
             stage.setScene(mainMenu.getScene());

@@ -72,11 +72,9 @@ public class Winning implements EventHandler<ActionEvent>{
 	}
 	
 	public void setStage(Stage stage) {
-		
-		// STAGE INITIALIZATIONS
-		// TODO: Simplify this 
+
 		this.stage = stage;
-		this.stage.setTitle("Tidy Teens - Losing stage");
+		this.stage.setTitle("Tidy Teens");
 		this.stage.setScene(scene);
 		this.stage.show();
 		

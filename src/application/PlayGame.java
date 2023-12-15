@@ -40,7 +40,7 @@ public class PlayGame{
 			scene.getRoot().requestFocus();		
 			
 			this.stage = stage;
-			this.stage.setTitle("Tidy Teens - Play Game");
+			this.stage.setTitle("Tidy Teens");
 			this.stage.setScene(scene);
 			this.stage.show();
 		} catch (IOException e) {
