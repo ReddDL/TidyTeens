@@ -289,7 +289,7 @@ public class GameTimer implements Initializable{
 	private void pointChecker(double totalTime, double currentTime) {
 		Random randInt = new Random();
 		int multiplier = randInt.nextInt(2) + 1;
-		int scoreComputation = (int) (((TOTAL_DURATION - currentTime) * 2 ) / 1500) * multiplier;
+		int scoreComputation = (int) ((((TOTAL_DURATION - currentTime) * 2 ) / 1500) * multiplier);
 		playerComponent.incrementScore(scoreComputation);		
 		score.setText(String.valueOf(playerComponent.getScore()));
 		System.out.println("PLAYER SCORE: " + playerComponent.getScore());
