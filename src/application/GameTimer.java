@@ -10,6 +10,7 @@ package application;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
@@ -286,7 +287,9 @@ public class GameTimer implements Initializable{
 	 * - updates the text on the scene
 	 */
 	private void pointChecker(double totalTime, double currentTime) {
-		int scoreComputation = (int) ((TOTAL_DURATION - currentTime) * 2 ) / 1500;
+		Random randInt = new Random();
+		int multiplier = randInt.nextInt(2) + 1;
+		int scoreComputation = (int) (((TOTAL_DURATION - currentTime) * 2 ) / 1500) * multiplier;
 		playerComponent.incrementScore(scoreComputation);		
 		score.setText(String.valueOf(playerComponent.getScore()));
 		System.out.println("PLAYER SCORE: " + playerComponent.getScore());

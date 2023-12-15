@@ -32,6 +32,10 @@ public class Bomb extends Sprite{
 
     }
     
+    /*
+     * initializeBombSound()
+     * - initializes the sound to be used when a bomb is dropped
+     */
     private void initializeBombSound() {
 	    Media startSoundMedia = new Media(getClass().getResource("splashSound.mp3").toString());
         splashSound = new MediaPlayer(startSoundMedia);

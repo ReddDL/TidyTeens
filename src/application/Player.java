@@ -114,7 +114,10 @@ public class Player extends Sprite{
                 }
         ));
     }
-    
+    /*
+     * initializeDamageSound(){
+     * - initializes the damage sound to be used when the player is damaged
+     */
     private void initializeDamageSound() {
 	    Media startSoundMedia = new Media(getClass().getResource("damageSound.mp3").toString());
         damageSound = new MediaPlayer(startSoundMedia);
@@ -223,7 +226,7 @@ public class Player extends Sprite{
 		});
 	}
 	
-	// If the player is damaged, decrement the lives
+	// If the player is damaged, decrement the lives, play the damage sound
 	public void damagePlayer() {
         if (!damageSound.getStatus().equals(MediaPlayer.Status.PLAYING)) {
             damageSound.play();
