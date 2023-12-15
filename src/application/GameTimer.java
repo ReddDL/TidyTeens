@@ -214,6 +214,7 @@ public class GameTimer implements Initializable{
 				
 				// win condition
 				if (breakableNum == 0) {
+					backgroundMusic.stop();
 					System.out.println("YOU WON THE GAME");
 					didWin = true;
 					gameOver(didWin);
